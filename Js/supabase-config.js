@@ -8,6 +8,6 @@
  * NUNCA coloque service_role aqui.
  */
 window.OPA_SUPABASE_CONFIG = {
-  url: 'COLE_AQUI_SUA_PROJECT_URL',
-  anonKey: 'COLE_AQUI_SUA_PUBLISHABLE_OU_ANON_KEY'
+  url: 'https://hqxlhjwsglvfcchylxxf.supabase.co/rest/v1/',
+  anonKey: 'sb_publishable_P_Jz-6VejmbR2JpzaRYw1Q_OkrwsLAn'
 };
