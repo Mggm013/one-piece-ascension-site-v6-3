@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>One Piece Ascension • Jogador</title>
+<meta content="Login, múltiplos personagens, estatísticas e painel pessoal em um só lugar." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<link href="../Css/codigos.css" rel="stylesheet"/>
+</head>
+<body data-page="player" data-require-auth="true" data-root="../" id="site-body">
+<nav class="navbar navbar-expand-xxl shell-nav sticky-top"><div class="container-fluid px-3 px-lg-4">
+<a class="navbar-brand d-flex align-items-center gap-3" href="../index.html"><div class="brand-pip"><i class="bi bi-compass-fill"></i></div><img alt="One Piece Ascension" id="navbar-logo" src="../Icons/logo-op.svg"/></a>
+<button aria-controls="navshell" aria-expanded="false" aria-label="Abrir menu" class="navbar-toggler" data-bs-target="#navshell" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navshell"><ul class="navbar-nav me-auto mb-2 mb-xxl-0 align-items-xxl-center">
+<li class="nav-item"><a class="nav-link" data-nav="home" href="../index.html">Início</a></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">O RPG</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/inicio-historia.html">Início &amp; História</a></li><li><a class="dropdown-item" href="../Pages/tutorial.html">Introdução &amp; Tutorial</a></li><li><a class="dropdown-item" href="../Pages/pacote-iniciante.html">Pacote Iniciante</a></li><li><a class="dropdown-item fw-bold" href="../Pages/regras-v6.html">Regras Centrais v6.0</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ficha &amp; Evolução</a><ul class="dropdown-menu mega-menu">
+<li><h6 class="dropdown-header">Criação</h6></li><li><a class="dropdown-item" href="../Pages/criacao-ficha.html">Criação da Ficha</a></li><li><a class="dropdown-item" href="../Pages/racas.html">Raças</a></li><li><a class="dropdown-item" href="../Pages/linhagens.html">Famílias / Linhagens</a></li><li><a class="dropdown-item" href="../Pages/profissoes.html">Profissões</a></li><li><a class="dropdown-item" href="../Pages/edl.html">Estilos de Luta</a></li>
+<li><h6 class="dropdown-header">Progressão</h6></li><li><a class="dropdown-item" href="../Pages/evolucao.html">Evolução</a></li><li><a class="dropdown-item" href="../Pages/pericia-missoes.html">Perícia &amp; Missões</a></li><li><a class="dropdown-item" href="../Pages/arcos.html">Arcos</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Poderes &amp; Combate</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/combate.html">Combate</a></li><li><a class="dropdown-item" href="../Pages/hp-dano.html">HP &amp; Dano</a></li><li><a class="dropdown-item" href="../Pages/hospital.html">Hospital</a></li><li><a class="dropdown-item" href="../Pages/poderes.html">Akuma no Mi &amp; Haki</a></li><li><a class="dropdown-item" href="../Pages/habilidades-raciais.html">Habilidades Raciais</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Mundo &amp; Navegação</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/navios.html">Navios, Docas &amp; Reparos</a></li><li><a class="dropdown-item" href="../Pages/navegacao.html">Navegação &amp; Eventos</a></li><li><a class="dropdown-item" href="../Pages/npcs.html">NPCs, Contratos &amp; Frotas</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Mercado</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/loja.html">Loja Ascension</a></li><li><a class="dropdown-item" href="../Pages/negocios.html">Negócios Legais &amp; Ilegais</a></li><li><a class="dropdown-item" href="../Pages/submundo.html">Submundo &amp; Mercado Negro</a></li><li><a class="dropdown-item" href="../Pages/armas.html">Grau de Arma &amp; Armas de Fogo</a></li></ul></li>
+<li class="nav-item"><a class="nav-link" data-nav="faccoes" href="../Pages/faccoes.html">Facções</a></li>
+<li class="nav-item"><a class="nav-link" data-nav="player" href="../Pages/player.html">Painel do Jogador</a></li>
+<li class="nav-item d-none" id="menu-restrito"></li>
+</ul>
+<div class="d-flex align-items-center gap-2" id="area-auth-botoes"><button class="btn btn-rpg-outline btn-sm" id="btn-login">Entrar</button><button class="btn btn-rpg btn-sm" id="btn-cadastro">Cadastrar</button></div>
+<div class="d-none align-items-center gap-3" id="area-auth-usuario"><div class="d-none d-xl-flex flex-column text-end me-2"><span class="text-muted small">Facção ativa</span><strong class="faction-tag" id="current-faction-badge">Central do Mar</strong></div><div class="avatar-ring"><img alt="Avatar" aria-expanded="false" class="avatar-circle" data-bs-toggle="dropdown" id="avatar-display" src="../Icons/hero-placeholder.svg"/></div><ul class="dropdown-menu dropdown-menu-end mt-2"><li><button class="dropdown-item" id="btn-painel-usuario"><i class="bi bi-person-vcard me-2"></i>Meus personagens</button></li><li><button class="dropdown-item" id="btn-perfil"><i class="bi bi-bar-chart-line me-2"></i>Meu perfil</button></li><li><button class="dropdown-item" id="btn-logout-top"><i class="bi bi-box-arrow-right me-2"></i>Sair</button></li></ul></div>
+</div></div></nav>
+<main>
+<section class="hero">
+<div class="container px-3 px-lg-4">
+<div class="hero-card">
+<div class="row g-0">
+<div class="col-lg-5 hero-art"></div>
+<div class="col-lg-7 hero-content">
+<div class="kicker">Conta</div>
+<h1>Painel do Jogador</h1>
+<p>Gerencie seus dois personagens, registre cada evolução e gere o aviso que continua sendo enviado no WhatsApp.</p>
+<div class="hero-actions">
+<a class="btn btn-rpg" href="../index.html"><i class="bi bi-house-fill me-2"></i>Voltar ao Hub</a>
+<a class="btn btn-rpg-outline" href="./tutorial.html"><i class="bi bi-journal-text me-2"></i>Começar pelo tutorial</a>
+</div>
+<div class="row g-3 mt-4">
+<div class="col-sm-4">
+<div class="hero-stat">
+<div class="k">Central</div>
+<div class="v">One Piece Ascension</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="hero-stat">
+<div class="k">Modo</div>
+<div class="v">Texto / RPG sério</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="hero-stat">
+<div class="k">Estado</div>
+<div class="v" id="home-character">Experiência viva</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="container px-3 px-lg-4 pb-5">
+<div class="row g-4">
+<div class="col-xl-3">
+<div class="surface-card reveal sidebar-shell sticky-xl-top" style="top:105px">
+<div class="kicker">Conta v6.3</div>
+<div class="section-title" style="font-size:1.55rem">Painel do Jogador</div>
+<p class="section-subtitle">Cada player possui até <strong>2 personagens ativos</strong> e registra as próprias alterações. A ADM recebe tudo em uma fila de auditoria.</p>
+<div class="d-grid gap-2 mt-3">
+<button class="btn btn-rpg" id="btn-player-login">Entrar</button>
+<button class="btn btn-rpg-outline" id="btn-player-cadastro">Cadastrar</button>
+<button class="btn btn-rpg-soft" id="btn-novo-personagem"><i class="bi bi-person-plus me-2"></i>Novo personagem</button>
+</div>
+<div class="segment mt-4"><div class="text-muted small">Conta</div><strong id="player-state-title">Sem sessão</strong><span class="text-muted d-block mt-1" id="player-state-body">Faça login para acessar seus personagens.</span></div>
+<div class="segment mt-3"><div class="text-muted small">Slots ativos</div><strong id="char-slot-counter">0/2</strong></div>
+<div class="system-note warning mt-3"><i class="bi bi-whatsapp"></i><div><strong>Regra de controle:</strong> salvar no site não substitui o aviso no WhatsApp. Depois da alteração, copie o resumo e informe no grupo como vocês já fazem.</div></div>
+<div class="system-note mt-3"><i class="bi bi-database-check"></i><div><strong>Banco compartilhado:</strong> fichas, histórico e auditoria são sincronizados pelo Supabase. O localStorage é usado somente para preferências locais, como qual personagem está selecionado.</div></div>
+</div>
+</div>
+<div class="col-xl-9">
+<div class="surface-card reveal d-none mb-4" id="team-access-card"><div class="kicker">Equipe administrativa</div><h2 class="section-title" style="font-size:1.65rem">Ativar acesso ADM</h2><p class="section-subtitle" id="team-access-status">Se você faz parte da equipe, informe o Código da Equipe. A validação acontece no backend; o código não fica no GitHub.</p><div class="row g-2 align-items-end"><div class="col-md-8"><label class="form-label">Código da Equipe</label><div class="input-group"><input class="form-control" id="team-access-code" type="password" autocomplete="off" placeholder="Código fornecido pelo Owner"/><button class="btn btn-rpg-outline" id="toggle-activation-code" type="button"><i class="bi bi-eye"></i></button></div></div><div class="col-md-4"><button class="btn btn-rpg w-100" id="btn-claim-admin-code"><i class="bi bi-shield-lock me-2"></i>Ativar ADM</button></div></div><div class="small text-muted mt-3">A ativação exige e-mail confirmado e possui limite de tentativas. Seus dois personagens e todo o histórico continuam intactos.</div></div>
+<div class="surface-card reveal" id="player-empty-state">
+<div class="text-center py-5"><img alt="Sem personagem" class="mb-4" src="../Icons/no-character.svg" style="max-width:230px;width:100%"/><h2 class="section-title">Nenhum personagem ativo</h2><p class="section-subtitle mx-auto" style="max-width:650px">Faça login ou crie um personagem. Cada conta pode manter dois personagens ativos simultaneamente.</p></div>
+</div>
+<div class="d-none" id="player-character-content">
+<div class="surface-card reveal">
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3"><div><div class="kicker">Ficha oficial</div><h2 class="section-title mb-0">Personagem ativo</h2></div><div style="min-width:280px"><label class="form-label">Selecionar personagem</label><select class="form-select" id="select-personagem-ativo"></select></div></div>
+<div class="row g-4 mt-2">
+<div class="col-lg-8"><div class="row g-3"><div class="col-md-6"><label class="form-label">Recompensa / Cargo</label><input class="form-control" id="viewRecompensa" readonly/></div><div class="col-md-3"><label class="form-label">Facção</label><input class="form-control" id="viewFaccao" readonly/></div><div class="col-md-3"><label class="form-label">Patente elegível</label><div class="form-control readonly-box" id="char-patente-elegivel">—</div></div><div class="col-md-8"><label class="form-label">Akuma no Mi</label><input class="form-control" id="viewPoder" readonly/></div><div class="col-md-4"><label class="form-label">Berries</label><div class="form-control readonly-box" id="char-berries">0 ₿</div></div></div></div>
+<div class="col-lg-4"><div class="metric-card h-100"><div class="label">Pontos Brutos</div><div class="value" id="char-total-bruto">0</div><div class="small text-muted mt-2">Soma dos 6 atributos base</div></div></div>
+</div>
+</div>
+
+<div class="surface-card reveal mt-4">
+<div class="section-title" style="font-size:1.65rem">Atributos atuais</div><p class="section-subtitle">Os números abaixo são a ficha atual. Para mudar algo, use o formulário “Registrar alteração” — nunca sobrescreva silenciosamente o histórico.</p>
+<div class="row g-3 mt-1">
+<div class="col-6 col-md-4 col-xl-2"><label class="form-label">FOR</label><input class="form-control text-center" id="attr-for" readonly type="number"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">RES</label><input class="form-control text-center" id="attr-res" readonly type="number"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">AGI</label><input class="form-control text-center" id="attr-agi" readonly type="number"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">PRE</label><input class="form-control text-center" id="attr-pre" readonly type="number"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">INT</label><input class="form-control text-center" id="attr-int" readonly type="number"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">ESP</label><input class="form-control text-center" id="attr-esp" readonly type="number"/></div>
+</div>
+</div>
+
+<div class="surface-card reveal mt-4">
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3"><div><div class="kicker">Orçamento de build</div><h2 class="section-title mb-0" style="font-size:1.65rem">Buffs comuns</h2></div><strong class="badge-soft badge-gold" id="char-buff-total">0% / 1000%</strong></div>
+<p class="section-subtitle mt-2">Todos os buffs comuns somados entram no teto global de 1000%. Bônus gerados pelo próprio Haki e pela própria Akuma ficam fora dessa conta.</p><div class="progress opa-progress mt-3"><div class="progress-bar" id="char-buff-bar" style="width:0%"></div></div><div class="buff-grid mt-4" id="buff-breakdown"></div>
+<div class="row g-3 mt-4"><div class="col-md-6"><div class="segment"><div class="text-muted small">Haki — extra ao teto</div><strong id="char-haki-extra">+0%</strong></div></div><div class="col-md-6"><div class="segment"><div class="text-muted small">Akuma — extra ao teto</div><strong id="char-akuma-extra">+0%</strong></div></div></div>
+</div>
+
+<div class="surface-card reveal mt-4 border-warning-subtle">
+<div class="kicker">Autoatualização auditável</div><h2 class="section-title" style="font-size:1.9rem">Registrar alteração mecânica</h2>
+<p class="section-subtitle">Informe apenas a diferença ganha ou perdida. Ex.: Treino Pesado deu +625 FOR → coloque <strong>625</strong> em Δ FOR. O site guarda valor anterior, valor novo, origem, referência e envia a mudança para a ADM.</p>
+<form id="player-update-form">
+<h3 class="h6 text-uppercase text-muted mt-4">Pontos brutos</h3><div class="row g-2">
+<div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ FOR</label><input class="form-control" id="player-delta-for" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ RES</label><input class="form-control" id="player-delta-res" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ AGI</label><input class="form-control" id="player-delta-agi" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ PRE</label><input class="form-control" id="player-delta-pre" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ INT</label><input class="form-control" id="player-delta-int" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ ESP</label><input class="form-control" id="player-delta-esp" type="number" value="0"/></div>
+</div>
+<h3 class="h6 text-uppercase text-muted mt-4">Buffs comuns — contam no limite global</h3><div class="row g-2">
+<div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ% FOR</label><input class="form-control" id="player-buff-delta-for" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ% RES</label><input class="form-control" id="player-buff-delta-res" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ% AGI</label><input class="form-control" id="player-buff-delta-agi" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ% PRE</label><input class="form-control" id="player-buff-delta-pre" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ% INT</label><input class="form-control" id="player-buff-delta-int" type="number" value="0"/></div><div class="col-6 col-md-4 col-xl-2"><label class="form-label">Δ% ESP</label><input class="form-control" id="player-buff-delta-esp" type="number" value="0"/></div>
+</div>
+<h3 class="h6 text-uppercase text-muted mt-4">Exceções — fora dos 1000%</h3><div class="row g-3">
+<div class="col-md-3"><label class="form-label">Δ% bônus Haki</label><input class="form-control" id="player-delta-haki" type="number" value="0"/></div><div class="col-md-3"><label class="form-label">Δ% bônus Akuma</label><input class="form-control" id="player-delta-akuma" type="number" value="0"/></div>
+<div class="col-md-6"><label class="form-label">Origem</label><select class="form-select" id="player-update-origin"><option value="Treino">Treino</option><option value="Missão">Missão</option><option value="Arco">Arco</option><option value="Evento ADM">Evento ADM</option><option value="Recompensa ADM">Recompensa ADM</option><option value="Equipamento">Equipamento</option><option value="Raça / Linhagem">Raça / Linhagem</option><option value="Profissão / EDL">Profissão / EDL</option><option value="Haki">Haki</option><option value="Akuma no Mi">Akuma no Mi</option><option value="Compra / Venda">Compra / Venda</option><option value="Outro">Outro</option></select></div>
+<div class="col-12"><label class="form-label">Referência para conferência da ADM <span class="text-danger">*</span></label><input class="form-control" id="player-update-note" placeholder="Ex.: Treino Pesado 07/08; Missão Suicida #18; recompensa do arco X" required/></div>
+</div><div class="d-flex justify-content-end mt-4"><button class="btn btn-rpg" type="submit"><i class="bi bi-cloud-arrow-up me-2"></i>Salvar alteração e enviar para auditoria</button></div>
+</form>
+</div>
+
+<div class="surface-card reveal mt-4">
+<div class="kicker">Dados gerais</div><h2 class="section-title" style="font-size:1.9rem">Editar identidade e recursos da ficha</h2><p class="section-subtitle">Também é o próprio player que mantém estes dados atualizados. Qualquer campo modificado gera um registro “antes → depois” para a ADM.</p>
+<form id="player-meta-form"><div class="row g-3">
+<div class="col-md-4"><label class="form-label">Facção</label><select class="form-select" id="player-meta-faccao"><option value="Pirata">Pirata</option><option value="Marinha">Marinha</option><option value="Mafia">Máfia</option><option value="Cacador">Caçador</option><option value="Revolucionario">Revolucionário</option></select></div>
+<div class="col-md-4"><label class="form-label">Cargo / Recompensa</label><input class="form-control" id="player-meta-cargo"/></div><div class="col-md-4"><label class="form-label">Berries</label><input class="form-control" id="player-meta-berries" type="number" min="0"/></div>
+<div class="col-md-4"><label class="form-label">Raça</label><input class="form-control" id="player-meta-raca"/></div><div class="col-md-4"><label class="form-label">Linhagem</label><input class="form-control" id="player-meta-linhagem"/></div><div class="col-md-4"><label class="form-label">Profissão</label><input class="form-control" id="player-meta-profissao"/></div>
+<div class="col-md-4"><label class="form-label">Subprofissão</label><input class="form-control" id="player-meta-subprofissao"/></div><div class="col-md-4"><label class="form-label">EDL</label><input class="form-control" id="player-meta-edl"/></div><div class="col-md-4"><label class="form-label">Akuma no Mi</label><input class="form-control" id="player-meta-akuma"/></div>
+<div class="col-md-6"><label class="form-label">Localização</label><input class="form-control" id="player-meta-localizacao"/></div><div class="col-md-6"><label class="form-label">Navio</label><input class="form-control" id="player-meta-navio"/></div>
+<div class="col-md-4"><label class="form-label">Origem</label><select class="form-select" id="player-meta-origin"><option>Atualização cadastral</option><option>Compra / Venda</option><option>Missão</option><option>Arco</option><option>Evento ADM</option><option>Mudança de Facção</option><option>Profissão / EDL</option><option>Akuma no Mi</option><option>Outro</option></select></div><div class="col-md-8"><label class="form-label">Referência <span class="text-danger">*</span></label><input class="form-control" id="player-meta-note" placeholder="Explique de onde veio a mudança" required/></div>
+</div><div class="text-end mt-4"><button class="btn btn-rpg-outline" type="submit"><i class="bi bi-pencil-square me-2"></i>Salvar dados e registrar histórico</button></div></form>
+</div>
+
+<div class="surface-card reveal mt-4">
+<div class="section-title" style="font-size:1.65rem">Identidade mecânica atual</div><div class="shell-grid grid-3 mt-3"><div class="segment"><div class="text-muted small">Raça</div><strong id="char-raca">—</strong></div><div class="segment"><div class="text-muted small">Linhagem</div><strong id="char-linhagem">—</strong></div><div class="segment"><div class="text-muted small">Profissão</div><strong id="char-profissao">—</strong></div><div class="segment"><div class="text-muted small">Subprofissão</div><strong id="char-subprofissao">—</strong></div><div class="segment"><div class="text-muted small">EDL</div><strong id="char-edl">—</strong></div></div>
+</div>
+
+<div class="row g-4 mt-1">
+<div class="col-xl-7"><div class="surface-card reveal h-100"><div class="d-flex justify-content-between align-items-center gap-3 flex-wrap"><div><div class="kicker">Auditoria transparente</div><h2 class="section-title mb-0" style="font-size:1.65rem">Histórico de atualizações</h2></div><span class="badge-soft badge-accent">Nada é sobrescrito sem registro</span></div><div class="history-list mt-4" id="character-history"></div></div></div>
+<div class="col-xl-5"><div class="surface-card reveal h-100"><div class="kicker">WhatsApp continua obrigatório</div><h2 class="section-title" style="font-size:1.65rem">Resumo da última alteração</h2><p class="section-subtitle">Depois de salvar, copie e mande no grupo. A ADM consegue cruzar o aviso do WhatsApp com o histórico do site.</p><textarea class="form-control" id="player-whatsapp-summary" readonly rows="13"></textarea><button class="btn btn-rpg w-100 mt-3" id="btn-copy-player-whatsapp"><i class="bi bi-whatsapp me-2"></i>Copiar resumo</button></div></div>
+</div>
+
+<div class="surface-card reveal mt-4 border-danger-subtle"><div class="d-flex justify-content-between align-items-center flex-wrap gap-3"><div><h3 class="mb-1">Morte permanente</h3><p class="text-muted mb-0">O personagem é arquivado no memorial, libera o slot e a ocorrência também fica registrada para auditoria.</p></div><button class="btn btn-outline-danger" id="btn-character-death">Registrar morte</button></div></div>
+</div>
+
+<div class="surface-card reveal mt-4"><div class="shell-grid grid-3"><div class="segment"><div class="text-muted small">Criados</div><strong id="status-criados">0</strong></div><div class="segment"><div class="text-muted small">Mortos</div><strong id="status-mortos">0</strong></div><div class="segment"><div class="text-muted small">Cargo / recompensa atual</div><strong id="status-maior-cargo">Nenhum</strong></div></div></div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer-shell">
+<div class="container px-3 px-lg-4">
+<div class="footer-card">
+<div class="row g-4 align-items-center">
+<div class="col-lg-6">
+<div class="section-title mb-2" style="font-size:1.6rem">Enciclopédia do Mar</div>
+<p class="section-subtitle mb-0">Busque páginas, sistemas, facções e módulos do RPG.</p>
+</div>
+<div class="col-lg-6">
+<form class="d-flex gap-2" id="site-search-form">
+<input class="form-control" id="site-search-input" placeholder="Buscar akuma no mi, ilhas, navios..." type="search"/>
+<button class="btn btn-rpg" type="submit">Buscar</button>
+</form>
+</div>
+</div>
+</div>
+<p class="text-center small mt-4 mb-0">© 2026 One Piece Ascension — central oficial do RPG.</p>
+</div>
+</footer>
+<div class="position-fixed bottom-0 end-0 p-3 d-flex flex-column gap-2" id="toast-host" style="z-index:1080;"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../Js/supabase-config.js"></script>
+<script src="../Js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" fill="none">
+      <rect width="900" height="500" rx="32" fill="#0c131b"/>
+      <circle cx="450" cy="210" r="112" fill="#d9b26d" fill-opacity=".08"/>
+      <path d="M450 134l27 58 64 9-46 45 11 63-56-29-56 29 11-63-46-45 64-9 27-58z" fill="#d9b26d" fill-opacity=".30"/>
+      <text x="450" y="360" text-anchor="middle" fill="#eef4fb" font-family="Georgia, serif" font-size="30" font-weight="700">Nenhum personagem ativo</text>
+      <text x="450" y="394" text-anchor="middle" fill="#aebccd" font-family="Inter, Arial, sans-serif" font-size="15">Crie um novo personagem para liberar o painel personalizado.</text>
+    </svg>

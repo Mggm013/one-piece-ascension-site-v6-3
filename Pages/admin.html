@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>One Piece Ascension • Admin</title>
+<meta content="Controle avançado do mundo e do sistema, acessível apenas por código secreto." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<link href="../Css/codigos.css" rel="stylesheet"/>
+</head>
+<body data-page="admin" data-require-auth="true" data-root="../" id="site-body">
+<nav class="navbar navbar-expand-xxl shell-nav sticky-top"><div class="container-fluid px-3 px-lg-4">
+<a class="navbar-brand d-flex align-items-center gap-3" href="../index.html"><div class="brand-pip"><i class="bi bi-compass-fill"></i></div><img alt="One Piece Ascension" id="navbar-logo" src="../Icons/logo-op.svg"/></a>
+<button aria-controls="navshell" aria-expanded="false" aria-label="Abrir menu" class="navbar-toggler" data-bs-target="#navshell" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navshell"><ul class="navbar-nav me-auto mb-2 mb-xxl-0 align-items-xxl-center">
+<li class="nav-item"><a class="nav-link" data-nav="home" href="../index.html">Início</a></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">O RPG</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/inicio-historia.html">Início &amp; História</a></li><li><a class="dropdown-item" href="../Pages/tutorial.html">Introdução &amp; Tutorial</a></li><li><a class="dropdown-item" href="../Pages/pacote-iniciante.html">Pacote Iniciante</a></li><li><a class="dropdown-item fw-bold" href="../Pages/regras-v6.html">Regras Centrais v6.0</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ficha &amp; Evolução</a><ul class="dropdown-menu mega-menu">
+<li><h6 class="dropdown-header">Criação</h6></li><li><a class="dropdown-item" href="../Pages/criacao-ficha.html">Criação da Ficha</a></li><li><a class="dropdown-item" href="../Pages/racas.html">Raças</a></li><li><a class="dropdown-item" href="../Pages/linhagens.html">Famílias / Linhagens</a></li><li><a class="dropdown-item" href="../Pages/profissoes.html">Profissões</a></li><li><a class="dropdown-item" href="../Pages/edl.html">Estilos de Luta</a></li>
+<li><h6 class="dropdown-header">Progressão</h6></li><li><a class="dropdown-item" href="../Pages/evolucao.html">Evolução</a></li><li><a class="dropdown-item" href="../Pages/pericia-missoes.html">Perícia &amp; Missões</a></li><li><a class="dropdown-item" href="../Pages/arcos.html">Arcos</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Poderes &amp; Combate</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/combate.html">Combate</a></li><li><a class="dropdown-item" href="../Pages/hp-dano.html">HP &amp; Dano</a></li><li><a class="dropdown-item" href="../Pages/hospital.html">Hospital</a></li><li><a class="dropdown-item" href="../Pages/poderes.html">Akuma no Mi &amp; Haki</a></li><li><a class="dropdown-item" href="../Pages/habilidades-raciais.html">Habilidades Raciais</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Mundo &amp; Navegação</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/navios.html">Navios, Docas &amp; Reparos</a></li><li><a class="dropdown-item" href="../Pages/navegacao.html">Navegação &amp; Eventos</a></li><li><a class="dropdown-item" href="../Pages/npcs.html">NPCs, Contratos &amp; Frotas</a></li></ul></li>
+<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Mercado</a><ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../Pages/loja.html">Loja Ascension</a></li><li><a class="dropdown-item" href="../Pages/negocios.html">Negócios Legais &amp; Ilegais</a></li><li><a class="dropdown-item" href="../Pages/submundo.html">Submundo &amp; Mercado Negro</a></li><li><a class="dropdown-item" href="../Pages/armas.html">Grau de Arma &amp; Armas de Fogo</a></li></ul></li>
+<li class="nav-item"><a class="nav-link" data-nav="faccoes" href="../Pages/faccoes.html">Facções</a></li>
+<li class="nav-item"><a class="nav-link" data-nav="player" href="../Pages/player.html">Painel do Jogador</a></li>
+<li class="nav-item d-none" id="menu-restrito"></li>
+</ul>
+<div class="d-flex align-items-center gap-2" id="area-auth-botoes"><button class="btn btn-rpg-outline btn-sm" id="btn-login">Entrar</button><button class="btn btn-rpg btn-sm" id="btn-cadastro">Cadastrar</button></div>
+<div class="d-none align-items-center gap-3" id="area-auth-usuario"><div class="d-none d-xl-flex flex-column text-end me-2"><span class="text-muted small">Facção ativa</span><strong class="faction-tag" id="current-faction-badge">Central do Mar</strong></div><div class="avatar-ring"><img alt="Avatar" aria-expanded="false" class="avatar-circle" data-bs-toggle="dropdown" id="avatar-display" src="../Icons/hero-placeholder.svg"/></div><ul class="dropdown-menu dropdown-menu-end mt-2"><li><button class="dropdown-item" id="btn-painel-usuario"><i class="bi bi-person-vcard me-2"></i>Meus personagens</button></li><li><button class="dropdown-item" id="btn-perfil"><i class="bi bi-bar-chart-line me-2"></i>Meu perfil</button></li><li><button class="dropdown-item" id="btn-logout-top"><i class="bi bi-box-arrow-right me-2"></i>Sair</button></li></ul></div>
+</div></div></nav>
+<main>
+<section class="hero">
+<div class="container px-3 px-lg-4">
+<div class="hero-card">
+<div class="row g-0">
+<div class="col-lg-5 hero-art"></div>
+<div class="col-lg-7 hero-content">
+<div class="kicker">Restrito</div>
+<h1>Central de Auditoria ADM</h1>
+<p>Acompanhe o que cada player alterou, confira com o WhatsApp, sinalize inconsistências e preserve o histórico completo.</p>
+<div class="hero-actions">
+<a class="btn btn-rpg" href="../index.html"><i class="bi bi-house-fill me-2"></i>Voltar ao Hub</a>
+<a class="btn btn-rpg-outline" href="./tutorial.html"><i class="bi bi-journal-text me-2"></i>Começar pelo tutorial</a>
+</div>
+<div class="row g-3 mt-4">
+<div class="col-sm-4">
+<div class="hero-stat">
+<div class="k">Central</div>
+<div class="v">One Piece Ascension</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="hero-stat">
+<div class="k">Modo</div>
+<div class="v">Texto / RPG sério</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="hero-stat">
+<div class="k">Estado</div>
+<div class="v" id="home-character">Experiência viva</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="container px-3 px-lg-4 pb-5">
+<div id="admin-panel">
+<div class="surface-card reveal">
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3"><div><div class="kicker">Central v6.3</div><div class="section-title mb-0">Auditoria ADM — acompanhar, conferir e sinalizar.</div><p class="section-subtitle mt-2">Admin logado: <strong id="admin-username">—</strong></p></div><div class="d-flex gap-2 flex-wrap"><button class="btn btn-rpg-outline" id="btn-export-backup"><i class="bi bi-download me-2"></i>Exportar backup</button><label class="btn btn-rpg-soft mb-0"><i class="bi bi-upload me-2"></i>Importar backup<input accept="application/json" class="d-none" id="import-backup-file" type="file"/></label></div></div>
+<div class="system-note gold mt-4"><i class="bi bi-eye"></i><div><strong>Novo fluxo:</strong> a evolução normal é lançada pelo próprio player. Este painel não é mais o lugar principal para distribuir pontos; ele mostra o que mudou, quem mudou, a origem declarada e o valor anterior → novo.</div></div>
+<div class="system-note mt-3"><i class="bi bi-database-check"></i><div><strong>Banco compartilhado ativo:</strong> o painel lê personagens e alterações do Supabase. Novos lançamentos dos players entram na fila em tempo real e permanecem no histórico mesmo depois da conferência.</div></div>
+</div>
+
+<div class="surface-card reveal mt-4 d-none" id="owner-team-panel"><div class="d-flex justify-content-between align-items-start flex-wrap gap-3"><div><div class="kicker">Somente Owner</div><h2 class="section-title mb-0" style="font-size:1.9rem">Acesso da Equipe</h2><p class="section-subtitle mt-2">Gerencie o Código da Equipe sem colocar segredo algum no GitHub. Alterar o código não remove os ADMs que já foram ativados.</p></div><div id="owner-team-status"></div></div><div class="row g-3 mt-3"><div class="col-lg-8"><label class="form-label">Novo Código da Equipe</label><div class="input-group"><input class="form-control" id="owner-team-code" type="password" autocomplete="new-password" placeholder="Mínimo de 10 caracteres"/><button class="btn btn-rpg-outline" id="toggle-owner-team-code" type="button"><i class="bi bi-eye"></i></button></div></div><div class="col-lg-4 d-flex align-items-end"><button class="btn btn-rpg w-100" id="btn-owner-save-code"><i class="bi bi-key-fill me-2"></i>Salvar novo código</button></div></div><div class="d-flex gap-2 flex-wrap mt-3"><button class="btn btn-rpg-outline" id="btn-owner-toggle-signup"><i class="bi bi-pause-circle me-2"></i>Pausar novas ativações</button></div><hr class="my-4"/><div class="kicker">Equipe atual</div><div class="history-list mt-3" id="owner-team-members"></div></div>
+
+<div class="shell-grid grid-4 mt-4">
+<div class="metric-card"><div class="label">Pendentes</div><div class="value" id="audit-count-pending">0</div><div class="small text-muted">Aguardando conferência</div></div>
+<div class="metric-card"><div class="label">Conferidas</div><div class="value" id="audit-count-checked">0</div><div class="small text-muted">Já revisadas</div></div>
+<div class="metric-card"><div class="label">Sinalizadas</div><div class="value" id="audit-count-flagged">0</div><div class="small text-muted">Precisam de atenção</div></div>
+<div class="metric-card"><div class="label">Total auditável</div><div class="value" id="audit-count-total">0</div><div class="small text-muted">Histórico dos players</div></div>
+</div>
+
+<div class="surface-card reveal mt-4">
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3"><div><div class="kicker">Fila geral</div><h2 class="section-title mb-0" style="font-size:1.9rem">Alterações dos players</h2><p class="section-subtitle mt-2">O padrão abre nas pendentes. Use “Conferido” depois de cruzar com o WhatsApp ou “Sinalizar” quando houver dúvida/irregularidade.</p></div><div class="d-flex gap-2 flex-wrap"><select class="form-select" id="admin-audit-filter" style="min-width:170px"><option>Pendente</option><option>Conferido</option><option>Sinalizado</option><option>Todos</option></select><input class="form-control" id="admin-audit-search" placeholder="Buscar player, personagem, origem..." style="min-width:280px"/></div></div>
+<div class="d-grid gap-3 mt-4" id="admin-audit-feed"></div>
+</div>
+
+<div class="surface-card reveal mt-4">
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3"><div><div class="kicker">Consulta detalhada</div><h2 class="section-title mb-0" style="font-size:1.9rem">Ficha atual do personagem</h2></div><div class="d-flex gap-2 flex-wrap"><div><label class="form-label">Jogador</label><select class="form-select" id="admin-player-select" style="min-width:190px"></select></div><div><label class="form-label">Personagem</label><select class="form-select" id="admin-character-select" style="min-width:220px"></select></div></div></div>
+<div class="mt-4" id="admin-character-summary"></div>
+</div>
+
+<div class="row g-4 mt-1">
+<div class="col-xl-7"><div class="surface-card reveal h-100"><div class="kicker">Rastro completo</div><h2 class="section-title" style="font-size:1.9rem">Histórico do personagem</h2><div class="history-list" id="admin-history"></div></div></div>
+<div class="col-xl-5"><div class="surface-card reveal h-100 border-warning-subtle"><div class="kicker">Uso excepcional</div><h2 class="section-title" style="font-size:1.9rem">Correção Administrativa</h2><p class="section-subtitle">Use somente para corrigir erro confirmado. A correção não apaga o registro antigo: cria outra entrada assinada pela ADM.</p>
+<form id="admin-correction-form"><div class="row g-2">
+<div class="col-4"><label class="form-label">Δ FOR</label><input class="form-control" id="admin-correction-for" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ RES</label><input class="form-control" id="admin-correction-res" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ AGI</label><input class="form-control" id="admin-correction-agi" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ PRE</label><input class="form-control" id="admin-correction-pre" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ INT</label><input class="form-control" id="admin-correction-int" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ ESP</label><input class="form-control" id="admin-correction-esp" type="number" value="0"/></div>
+</div><details class="mt-3"><summary class="small fw-semibold">Corrigir buffs / exceções</summary><div class="row g-2 mt-1"><div class="col-4"><label class="form-label">Δ% buff FOR</label><input class="form-control" id="admin-correction-buff-for" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ% buff RES</label><input class="form-control" id="admin-correction-buff-res" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ% buff AGI</label><input class="form-control" id="admin-correction-buff-agi" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ% buff PRE</label><input class="form-control" id="admin-correction-buff-pre" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ% buff INT</label><input class="form-control" id="admin-correction-buff-int" type="number" value="0"/></div><div class="col-4"><label class="form-label">Δ% buff ESP</label><input class="form-control" id="admin-correction-buff-esp" type="number" value="0"/></div><div class="col-6"><label class="form-label">Δ% Haki</label><input class="form-control" id="admin-correction-haki" type="number" value="0"/></div><div class="col-6"><label class="form-label">Δ% Akuma</label><input class="form-control" id="admin-correction-akuma" type="number" value="0"/></div></div></details>
+<label class="form-label mt-3">Motivo da correção <span class="text-danger">*</span></label><textarea class="form-control" id="admin-correction-note" rows="3" placeholder="Ex.: player lançou +1500, correto era +500"></textarea><button class="btn btn-rpg w-100 mt-3" type="submit"><i class="bi bi-wrench-adjustable-circle me-2"></i>Registrar correção</button></form>
+<textarea class="form-control mt-3" id="admin-correction-summary" readonly rows="7" placeholder="O resumo da correção aparecerá aqui."></textarea><button class="btn btn-rpg-outline w-100 mt-2" id="btn-copy-admin-correction"><i class="bi bi-whatsapp me-2"></i>Copiar correção</button>
+</div></div>
+</div>
+</div>
+<div class="surface-card reveal d-none mt-4" id="admin-denied"><div class="section-title">Acesso negado</div><p class="section-subtitle">Esta área é exclusiva da equipe ADM.</p></div>
+</section>
+</main>
+<footer class="footer-shell">
+<div class="container px-3 px-lg-4">
+<div class="footer-card">
+<div class="row g-4 align-items-center">
+<div class="col-lg-6">
+<div class="section-title mb-2" style="font-size:1.6rem">Enciclopédia do Mar</div>
+<p class="section-subtitle mb-0">Busque páginas, sistemas, facções e módulos do RPG.</p>
+</div>
+<div class="col-lg-6">
+<form class="d-flex gap-2" id="site-search-form">
+<input class="form-control" id="site-search-input" placeholder="Buscar akuma no mi, ilhas, navios..." type="search"/>
+<button class="btn btn-rpg" type="submit">Buscar</button>
+</form>
+</div>
+</div>
+</div>
+<p class="text-center small mt-4 mb-0">© 2026 One Piece Ascension — central oficial do RPG.</p>
+</div>
+</footer>
+<div class="position-fixed bottom-0 end-0 p-3 d-flex flex-column gap-2" id="toast-host" style="z-index:1080;"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../Js/supabase-config.js"></script>
+<script src="../Js/app.js"></script>
+</body>
+</html>
