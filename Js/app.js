@@ -107,6 +107,33 @@
     if (!$('#criarPersonagemModal')) host.insertAdjacentHTML('beforeend', `
       <div class="modal fade" id="criarPersonagemModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Criar personagem</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="character-form"><div class="system-note warning mb-3"><i class="bi bi-people"></i><div>Máximo de <strong>2 personagens ativos</strong> por conta, validado pelo banco.</div></div><label class="form-label">Nome</label><input id="newCharNome" class="form-control input-rpg mb-3"><label class="form-label">Facção inicial</label><select id="newCharFaccao" class="form-select input-rpg mb-3"><option value="Pirata">Pirata</option><option value="Marinha">Marinha</option><option value="Mafia">Máfia</option><option value="Cacador">Caçador</option><option value="Revolucionario">Revolucionário</option></select><label class="form-label">Recompensa / cargo inicial</label><input id="newCharRecompensa" class="form-control input-rpg mb-3"><button class="btn btn-rpg w-100" type="submit">Registrar personagem</button></form></div></div></div></div>`);
 
+    // A criação oficial usa 100 pontos iniciais distribuídos apenas em FOR/RES/AGI/PRE/INT.
+    // Espírito inicia bloqueado até o personagem possuir Akuma no Mi; Haki progride somente após despertar.
+    const charModal = $('#criarPersonagemModal');
+    if (charModal && charModal.dataset.initialPointsUi !== '1') {
+      const charBody = $('.modal-body', charModal);
+      if (charBody) charBody.innerHTML = `
+        <form id="character-form">
+          <div class="system-note warning mb-3"><i class="bi bi-people"></i><div>Máximo de <strong>2 personagens ativos</strong> por conta, validado pelo banco.</div></div>
+          <label class="form-label">Nome</label><input id="newCharNome" class="form-control input-rpg mb-3" maxlength="100" required>
+          <label class="form-label">Facção inicial</label><select id="newCharFaccao" class="form-select input-rpg mb-3"><option value="Pirata">Pirata</option><option value="Marinha">Marinha</option><option value="Mafia">Máfia</option><option value="Cacador">Caçador de Recompensas</option><option value="Revolucionario">Revolucionário</option></select>
+          <label class="form-label">Recompensa / cargo inicial</label><input id="newCharRecompensa" class="form-control input-rpg mb-3">
+          <div class="system-note gold mb-3"><i class="bi bi-sliders"></i><div><strong>100 pontos iniciais</strong><br>Distribua exatamente 100 pontos entre Força, Resistência, Agilidade, Precisão e Inteligência. Espírito começa em 0 e só recebe pontos após consumir uma Akuma no Mi. Haki começa não desperto e só progride depois do desbloqueio.</div></div>
+          <div class="row g-2 mb-2">
+            <div class="col-6 col-md"><label class="form-label small">FOR</label><input id="initialAttrFor" data-initial-attr type="number" min="0" max="100" step="1" value="0" class="form-control input-rpg text-center"></div>
+            <div class="col-6 col-md"><label class="form-label small">RES</label><input id="initialAttrRes" data-initial-attr type="number" min="0" max="100" step="1" value="0" class="form-control input-rpg text-center"></div>
+            <div class="col-6 col-md"><label class="form-label small">AGI</label><input id="initialAttrAgi" data-initial-attr type="number" min="0" max="100" step="1" value="0" class="form-control input-rpg text-center"></div>
+            <div class="col-6 col-md"><label class="form-label small">PRE</label><input id="initialAttrPre" data-initial-attr type="number" min="0" max="100" step="1" value="0" class="form-control input-rpg text-center"></div>
+            <div class="col-6 col-md"><label class="form-label small">INT</label><input id="initialAttrInt" data-initial-attr type="number" min="0" max="100" step="1" value="0" class="form-control input-rpg text-center"></div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-3 small"><span>Distribuídos: <strong id="initialPointsUsed">0</strong>/100</span><span id="initialPointsRemaining" class="text-warning">Restam 100</span></div>
+          <button class="btn btn-rpg w-100" id="create-character-submit" type="button">Registrar personagem</button>
+        </form>`;
+      charModal.dataset.initialPointsUi = '1';
+      $$('[data-initial-attr]', charModal).forEach((input) => input.addEventListener('input', updateInitialPointCounter));
+      updateInitialPointCounter();
+    }
+
     // Adapta os modais que já vieram escritos no index.html.
     const loginInput = $('#loginUser');
     if (loginInput) {
@@ -137,6 +164,33 @@
       const label = photo.previousElementSibling;
       if (label?.classList.contains('form-label')) label.style.display='none';
     }
+  }
+
+  function getInitialAttributes() {
+    const clamp = (selector) => {
+      const input = $(selector);
+      const raw = Number(input?.value ?? 0);
+      if (!Number.isFinite(raw)) return 0;
+      const value = Math.max(0, Math.min(100, Math.trunc(raw)));
+      if (input && String(value) !== String(input.value)) input.value = value;
+      return value;
+    };
+    return {
+      for: clamp('#initialAttrFor'), res: clamp('#initialAttrRes'), agi: clamp('#initialAttrAgi'),
+      pre: clamp('#initialAttrPre'), int: clamp('#initialAttrInt')
+    };
+  }
+
+  function updateInitialPointCounter() {
+    const values = getInitialAttributes();
+    const used = Object.values(values).reduce((sum, value) => sum + value, 0);
+    const remaining = 100 - used;
+    if ($('#initialPointsUsed')) $('#initialPointsUsed').textContent = used;
+    if ($('#initialPointsRemaining')) {
+      $('#initialPointsRemaining').textContent = remaining >= 0 ? `Restam ${remaining}` : `Excedeu ${Math.abs(remaining)}`;
+      $('#initialPointsRemaining').className = remaining === 0 ? 'text-success' : remaining < 0 ? 'text-danger' : 'text-warning';
+    }
+    return { values, used };
   }
 
   const openModal = (id) => {
@@ -532,7 +586,28 @@
 
   async function deslogar(){ if(sb) await sb.auth.signOut(); state.authUser=null;state.profile=null;state.characters=[];state.logs=[];localStorage.removeItem(LS.ACTIVE);stopRealtime();renderAll();showToast('Sessão encerrada.','info'); }
 
-  async function salvarNovoPersonagem(){ if(!state.profile)return openModal('loginModal'); const nome=esc($('#newCharNome')?.value);if(!nome)return showToast('Informe o nome do personagem.','warning'); const {data,error}=await sb.rpc('create_character',{p_nome:nome,p_faccao:esc($('#newCharFaccao')?.value)||'Pirata',p_cargo:esc($('#newCharRecompensa')?.value)});if(error)return showToast(error.message,'danger');localStorage.setItem(LS.ACTIVE,data.id);closeModal('criarPersonagemModal');await refreshOwn();showToast(`${nome} criado no banco compartilhado.`,'success'); }
+  async function salvarNovoPersonagem(){
+    if(!state.profile) return openModal('loginModal');
+    const nome=esc($('#newCharNome')?.value);
+    if(!nome) return showToast('Informe o nome do personagem.','warning');
+    const initial=updateInitialPointCounter();
+    if(initial.used!==100) return showToast(`Distribua exatamente 100 pontos iniciais. Total atual: ${initial.used}/100.`,'warning');
+    const {data,error}=await sb.rpc('create_character',{
+      p_nome:nome,
+      p_faccao:esc($('#newCharFaccao')?.value)||'Pirata',
+      p_cargo:esc($('#newCharRecompensa')?.value),
+      p_attr_for:initial.values.for,
+      p_attr_res:initial.values.res,
+      p_attr_agi:initial.values.agi,
+      p_attr_pre:initial.values.pre,
+      p_attr_int:initial.values.int
+    });
+    if(error) return showToast(error.message,'danger');
+    localStorage.setItem(LS.ACTIVE,data.id);
+    closeModal('criarPersonagemModal');
+    await refreshOwn();
+    showToast(`${nome} criado com 100 pontos iniciais distribuídos.`,'success');
+  }
 
   async function refreshOwn(){ if(!sb)return; const {data:{user}}=await sb.auth.getUser();state.authUser=user||null;if(user){try{await loadOwnData();await consumePendingTeamCode();}catch(e){console.error(e);showToast(e.message||'Falha ao carregar dados.','danger');}}else{state.profile=null;state.characters=[];state.logs=[];} if(isStaffRole(state.profile?.role))await loadAdminData();setupRealtime();renderAll(); }
   async function refreshAdmin(){ if(!isStaffRole(state.profile?.role))return;await loadAdminData();renderAdminPage();renderOwnerTeamPanel(); }

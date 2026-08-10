@@ -6,7 +6,7 @@
 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">O RPG</a><ul class="dropdown-menu">
 <li><a class="dropdown-item" href="../Pages/inicio-historia.html">Início &amp; História</a></li><li><a class="dropdown-item" href="../Pages/tutorial.html">Introdução &amp; Tutorial</a></li><li><a class="dropdown-item" href="../Pages/pacote-iniciante.html">Pacote Iniciante</a></li><li><a class="dropdown-item fw-bold" href="../Pages/regras.html">Regras Centrais</a></li></ul></li>
 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ficha &amp; Evolução</a><ul class="dropdown-menu mega-menu">
-<li><h6 class="dropdown-header">Criação</h6></li><li><a class="dropdown-item" href="../Pages/criacao-ficha.html">Criação da Ficha</a></li><li><a class="dropdown-item" href="../Pages/racas.html">Raças</a></li><li><a class="dropdown-item" href="../Pages/linhagens.html">Famílias / Linhagens</a></li><li><a class="dropdown-item" href="../Pages/profissoes.html">Profissões</a></li><li><a class="dropdown-item" href="../Pages/edl.html">Estilos de Luta</a></li>
+<li><h6 class="dropdown-header">Criação</h6></li><li><a class="dropdown-item" href="../Pages/criacao-ficha.html">Criação da Ficha</a></li><li><a class="dropdown-item" href="../Pages/racas.html">Raças</a></li><li><a class="dropdown-item" href="../Pages/linhagens.html">Famílias / Linhagens</a></li><li><a class="dropdown-item text-warning" href="https://docs.google.com/spreadsheets/d/17NQW6O2eS8KofLsCYYWFl3ETdNahh9C6eidGI3MOdno/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><i class="bi bi-table me-2"></i>Consultar disponibilidade ↗</a></li><li><a class="dropdown-item" href="../Pages/profissoes.html">Profissões</a></li><li><a class="dropdown-item" href="../Pages/edl.html">Estilos de Luta</a></li>
 <li><h6 class="dropdown-header">Progressão</h6></li><li><a class="dropdown-item" href="../Pages/evolucao.html">Evolução</a></li><li><a class="dropdown-item" href="../Pages/pericia-missoes.html">Perícia &amp; Missões</a></li><li><a class="dropdown-item" href="../Pages/arcos.html">Arcos</a></li></ul></li>
 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Poderes &amp; Combate</a><ul class="dropdown-menu">
 <li><a class="dropdown-item" href="../Pages/combate.html">Combate</a></li><li><a class="dropdown-item" href="../Pages/hp-dano.html">HP &amp; Dano</a></li><li><a class="dropdown-item" href="../Pages/hospital.html">Hospital</a></li><li><a class="dropdown-item" href="../Pages/poderes.html">Akuma no Mi &amp; Haki</a></li><li><a class="dropdown-item" href="../Pages/habilidades-raciais.html">Habilidades Raciais</a></li></ul></li>
@@ -21,14 +21,15 @@
 <div class="d-flex align-items-center gap-2" id="area-auth-botoes"><button class="btn btn-rpg-outline btn-sm" id="btn-login">Entrar</button><button class="btn btn-rpg btn-sm" id="btn-cadastro">Cadastrar</button></div>
 <div class="d-none align-items-center gap-3" id="area-auth-usuario"><div class="d-none d-xl-flex flex-column text-end me-2"><span class="text-muted small">Facção ativa</span><strong class="faction-tag" id="current-faction-badge">Central do Mar</strong></div><div class="avatar-ring"><img alt="Avatar" aria-expanded="false" class="avatar-circle" data-bs-toggle="dropdown" id="avatar-display" src="../Icons/hero-placeholder.svg"/></div><ul class="dropdown-menu dropdown-menu-end mt-2"><li><button class="dropdown-item" id="btn-painel-usuario"><i class="bi bi-person-vcard me-2"></i>Meus personagens</button></li><li><button class="dropdown-item" id="btn-perfil"><i class="bi bi-bar-chart-line me-2"></i>Meu perfil</button></li><li><button class="dropdown-item" id="btn-logout-top"><i class="bi bi-box-arrow-right me-2"></i>Sair</button></li></ul></div>
 </div></div></nav><main>
-<section class="system-hero"><div class="container px-3 px-lg-4"><div class="system-hero-card"><div class="system-icon"><i class="bi bi-people-fill"></i></div><div><div class="kicker">Ficha &amp; Evolução</div><h1>Raças — Canônicas e Não-Canônicas</h1><p>Raças comuns, raras e não-canônicas, com buffs, debuffs, passivas e limites de slot.</p></div></div></div></section>
+<section class="system-hero"><div class="container px-3 px-lg-4"><div class="system-hero-card"><div class="system-icon"><i class="bi bi-people-fill"></i></div><div><div class="kicker">Ficha &amp; Evolução</div><h1>Raças — Canônicas e Não-Canônicas</h1><p>Raças comuns, raras e não-canônicas, com buffs, debuffs e passivas. A disponibilidade das escolhas controladas é consultada na planilha pública.</p></div></div></div></section>
 <section class="container px-3 px-lg-4 pb-5"><div class="system-layout"><aside class="system-toc"><div class="toc-title">Nesta página</div><a href="#integracao-racial">Regras Gerais</a><a href="#racas-completas">Raças completas</a></aside><article class="system-content"><section class="content-section" id="integracao-racial"><h2>Regras Gerais de Raças</h2><ul class="rule-list"><li>Buffs raciais positivos de atributo contam no orçamento global de 1000%.</li><li>Bônus especificamente de Haki ficam no campo de Haki, fora do teto global.</li><li>Passivas sem percentual, como voo, respiração aquática ou visão especial, não viram Pontos Brutos.</li><li>Debuffs raciais continuam sendo penalidades e não liberam espaço de buff.</li></ul></section><section class="content-section complete-system" id="racas-completas"><h2>Raças, buffs, debuffs e passivas</h2>
 <h3 class="system-subtitle">Regras Gerais de Raças</h3>
 <ul class="rule-list">
 <li>Cada raça tem buffs permanentes em atributos (% sobre os pontos atuais) e debuffs que equilibram.</li>
-<li>Raças Raras têm slots limitados (indicados). Quando cheio, nenhum novo player pode escolher aquela raça até abrir vaga.</li>
+<li>A disponibilidade das raças raras/controladas é mantida pela administração em uma planilha pública. Consulte a planilha antes de escolher uma dessas raças.</li>
 <li>Habilidades de raça são passivas — não precisam ser declaradas. O narrador aplica automaticamente.</li>
 </ul>
+<div class="system-note gold"><i class="bi bi-table"></i><div><strong>Disponibilidade de raças controladas</strong><br/>Os números de ocupação não ficam fixos no guia. <a href="https://docs.google.com/spreadsheets/d/17NQW6O2eS8KofLsCYYWFl3ETdNahh9C6eidGI3MOdno/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Consultar a planilha pública de raças e linhagens ↗</a></div></div>
 <h3 class="system-subtitle system-subtitle--caps">RAÇAS COMUNS</h3>
 <h3 class="system-subtitle">👨 Humanos</h3>
 <div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
@@ -83,7 +84,7 @@
 <div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
 <table class="table table-dark table-rpg">
 <thead><tr><th scope="col">Sub-tipo</th><th scope="col">Buffs</th><th scope="col">Passiva</th></tr></thead>
-<tbody><tr><td>Kuja</td><td>+15% Precisão (arco) / +15% Haki</td><td>Infusão de Haki em projéteis desde o nível básico — único poder disponível de nascença.</td></tr><tr><td>Rainha Kuja</td><td>+25% Haki / +15% Força</td><td>Mero Mero: 1x/combate testa petrificar alvo (d100, 70+). Pode ter serpentes como companheiras de combate.</td></tr></tbody>
+<tbody><tr><td>Kuja</td><td>+15% Precisão (arco) / +15% Haki</td><td>Infusão de Haki em projéteis desde o nível básico — único poder disponível de nascença.</td></tr></tbody>
 </table>
 </div>
 <h3 class="system-subtitle">🤖 Ciborgues</h3>
@@ -94,33 +95,35 @@
 </table>
 </div>
 <h3 class="system-subtitle system-subtitle--caps">RAÇAS RARAS</h3>
-<h3 class="system-subtitle">🧊 Lunaria (Slot: 1/5)</h3>
+<h3 class="system-subtitle">👑 Rainha Kuja</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0"><table class="table table-dark table-rpg"><thead><tr><th scope="col">Buffs</th><th scope="col">Passiva Especial</th><th scope="col">Disponibilidade</th></tr></thead><tbody><tr><td>+25% Haki / +15% Força</td><td>Mero Mero: 1x/combate testa petrificar alvo (d100, 70+). Pode ter serpentes como companheiras de combate.</td><td>Raça rara/controlada — consultar planilha pública.</td></tr></tbody></table></div>
+<h3 class="system-subtitle">🧊 Lunaria</h3>
 <div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
 <table class="table table-dark table-rpg">
 <thead><tr><th scope="col">Estado</th><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva</th></tr></thead>
 <tbody><tr><td>Chamas Acesas</td><td>+50% Resistência (impervio a dano leve)</td><td>-30% Agilidade</td><td>Raça Extinta: NPCs reconhecem e ficam intimidados. Pode voar.</td></tr><tr><td>Chamas Apagadas</td><td>+50% Agilidade + técnicas de voo</td><td>Vulnerável a dano normal</td><td></td></tr></tbody>
 </table>
 </div>
-<h3 class="system-subtitle">👁️ Três Olhos (Slot: 0/5)</h3>
+<h3 class="system-subtitle">👁️ Três Olhos</h3>
 <ul class="rule-list">
 <li>Buffs: +20% Haki base / +15% Inteligência</li>
 <li>Passiva: Falso Haki de Observação básico desde o início.</li>
 <li>Terceiro Olho (25.000+ pts Haki): leem Poneglyphs naturalmente — único poder exclusivo que nenhuma outra raça obtém.</li>
 </ul>
-<h3 class="system-subtitle">💪 Bucaneiros (Slot: 2/5)</h3>
+<h3 class="system-subtitle">💪 Bucaneiros</h3>
 <ul class="rule-list">
 <li>+40% Força / +20% Resistência</li>
 <li>Chance de Haki do Conquistador: 25% (outros: 10%)</li>
 <li>Linhagem Newgate: começa com 500 pts de Haki alocados.</li>
 <li>Canônico: são uma raça quase extinta devido ao Governo Mundial — a ficha deve refletir isso narrativamente.</li>
 </ul>
-<h3 class="system-subtitle">👺 Oni (Slot: 2/5)</h3>
+<h3 class="system-subtitle">👺 Oni</h3>
 <ul class="rule-list">
 <li>+50% Força / +30% Resistência / +10% Agilidade</li>
-<li>Debuff: -5% todos atributos a cada tentativa de usar Haki (resistência da raça ao Haki — lore de Kaido)</li>
+<li>Debuff: -5% todos atributos a cada tentativa de usar Haki (resistência racial ao Haki — característica registrada na antiga era)</li>
 <li>Passiva: Resistência Natural a venenos e doenças — não são afetados por venenos fracos.</li>
 </ul>
-<h3 class="system-subtitle">🌙 Gigante Ancestral (Slot: 0/5)</h3>
+<h3 class="system-subtitle">🌙 Gigante Ancestral</h3>
 <div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
 <table class="table table-dark table-rpg">
 <thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva Especial</th></tr></thead>
