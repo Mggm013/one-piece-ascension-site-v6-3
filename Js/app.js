@@ -218,6 +218,7 @@
     const cfg = FACTION_CONFIG[normalizeFaction(factionKey)] || FACTION_CONFIG.Padrao;
     if (cfg.themeClass) document.body.classList.add(cfg.themeClass);
     if ($('#navbar-logo')) $('#navbar-logo').src = cfg.logo;
+    document.querySelectorAll('.footer-logo').forEach((img) => { img.src = cfg.logo; });
     if ($('#current-faction-badge')) $('#current-faction-badge').textContent = cfg.label;
     if ($('#avatar-display')) $('#avatar-display').src = state.profile?.avatar_url || cfg.avatar;
   }
