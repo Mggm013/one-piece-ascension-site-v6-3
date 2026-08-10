@@ -20,6 +20,15 @@
     ['esp', 'Espírito', 'ESP', 'attr_esp', 'buff_esp'],
   ];
 
+
+  const BUILD_OPTIONS = {
+    raca: ['Humano','Tritão','Skypiean','Shandian / Birka','Tontatta','Gigante (Elbaf)','Sereia / Sereiano','Mink','Kuja','Ciborgue','Rainha Kuja','Lunaria','Três Olhos','Bucaneiro','Oni','Gigante Ancestral','Entropiano','Serpentine — Anacondrai','Serpentine — Hypnobrai','Serpentine — Fangpire','Serpentine — Constrictai','Serpentine — Venomari'],
+    linhagem: ['Sem Linhagem','D.','Roronoa','Newgate','Capone','Dracule','Marshall','Nico','Donquixote','Charlotte','God','Neptune','Boa','Vinsmoke','Kozuki','Oars','Sakazuki','Borsalino','Riku','Nefertari'],
+    profissao: ['Combatente','Combatente — Monstro','Combatente — Fantasma','Combatente — Forte','Atirador','Médico','Navegador','Carpinteiro','Cientista','Músico','Cozinheiro','Arqueólogo','Tesoureiro','Caçador','Domador'],
+    subprofissao: ['Nenhuma','Herbalista','Timoneiro','Ferreiro','Arquiteto','Gunsmith'],
+    edl: ['Santoryu (3 Espadas)','Nitoryu (2 Espadas)','Ittoryu (1 Espada)','Black Leg Style (Chutes)','Rokushiki (CP9/CP0)','Karatê Tritão','Electro Combat','Gyojin Jujutsu','Haki Style (puro Haki)','Arqueiro Kuja','Sulong Combat','Estilingue Artístico (God Style)']
+  };
+
   const MARINE_RANKS = [
     ['Aprendiz de Marinheiro', 0], ['Marinheiro', 5000], ['Cabo', 15000], ['Sargento', 30000],
     ['Sargento-Mor', 50000], ['Segundo-Tenente', 80000], ['Primeiro-Tenente', 115000],
@@ -32,7 +41,7 @@
 
   const FACTION_CONFIG = {
     Padrao: { themeClass: '', logo: `${ROOT}Icons/logo-op-ascension.png`, avatar: `${ROOT}Icons/hero-placeholder.svg`, label: 'Central do Mar' },
-    Pirata: { themeClass: 'theme-pirata', logo: `${ROOT}Icons/piratas.svg`, avatar: `${ROOT}Icons/piratas.svg`, label: 'Piratas' },
+    Pirata: { themeClass: 'theme-pirata', logo: `${ROOT}Icons/piratas-ascension.png`, avatar: `${ROOT}Icons/piratas.svg`, label: 'Piratas' },
     Marinha: { themeClass: 'theme-marinha', logo: `${ROOT}Icons/marinha-ascension.png`, avatar: `${ROOT}Icons/marinha.svg`, label: 'Marinha' },
     Mafia: { themeClass: 'theme-mafia', logo: `${ROOT}Icons/mafia-ascension.png`, avatar: `${ROOT}Icons/mafia.svg`, label: 'Máfia' },
     Cacador: { themeClass: 'theme-cacador', logo: `${ROOT}Icons/cacadores-ascension.png`, avatar: `${ROOT}Icons/cacadores.svg`, label: 'Caçadores' },
@@ -222,6 +231,11 @@
       atributos: {}, buffs: {},
       haki: { bonusPercent: n(row.haki_bonus) },
       akuma: { nome: row.akuma_nome || '', bonusPercent: n(row.akuma_bonus) },
+      autoBuffSources: Array.isArray(row.auto_buff_sources) ? row.auto_buff_sources : [],
+      autoBuffs: { for:n(row.auto_buff_for),res:n(row.auto_buff_res),agi:n(row.auto_buff_agi),pre:n(row.auto_buff_pre),int:n(row.auto_buff_int),esp:n(row.auto_buff_esp) },
+      manualBuffs: { for:n(row.manual_buff_for),res:n(row.manual_buff_res),agi:n(row.manual_buff_agi),pre:n(row.manual_buff_pre),int:n(row.manual_buff_int),esp:n(row.manual_buff_esp) },
+      autoHakiBonus:n(row.auto_haki_bonus), manualHakiBonus:n(row.manual_haki_bonus),
+      autoAkumaBonus:n(row.auto_akuma_bonus), manualAkumaBonus:n(row.manual_akuma_bonus),
       historico: logs.filter((l) => l.character_id === row.id),
     };
     ATTRS.forEach(([key,, , attrCol, buffCol]) => { c.atributos[key] = n(row[attrCol]); c.buffs[key] = n(row[buffCol]); });
@@ -337,6 +351,58 @@
     }).join('');
   }
 
+
+  function buffSourceText(source={}) {
+    const b=source.buffs||{}; const parts=[];
+    [['for','FOR'],['res','RES'],['agi','AGI'],['pre','PRE'],['int','INT'],['esp','ESP']].forEach(([k,l])=>{const v=n(b[k]);if(v)parts.push(`+${fmt(v)}% ${l}`);});
+    if(n(source.haki)) parts.push(`+${fmt(source.haki)}% Haki`);
+    if(n(source.akuma)) parts.push(`+${fmt(source.akuma)}% Akuma`);
+    return parts.join(' • ') || 'Sem percentual permanente automático';
+  }
+
+  function ensureBuildAutomationUI() {
+    if (document.body.dataset.page!=='player') return;
+    const configs=[['#player-meta-raca','raca','opa-racas'],['#player-meta-linhagem','linhagem','opa-linhagens'],['#player-meta-profissao','profissao','opa-profissoes'],['#player-meta-subprofissao','subprofissao','opa-subprofissoes'],['#player-meta-edl','edl','opa-edls']];
+    configs.forEach(([sel,key,id])=>{
+      const input=$(sel); if(!input) return; input.setAttribute('list',id);
+      if(!document.getElementById(id)){
+        const dl=document.createElement('datalist'); dl.id=id;
+        dl.innerHTML=BUILD_OPTIONS[key].map(v=>`<option value="${html(v)}"></option>`).join('');
+        document.body.appendChild(dl);
+      }
+    });
+    const r=$('#player-meta-raca'); if(r&&!r.placeholder) r.placeholder='Ex.: Mink, Rainha Kuja, Bucaneiro';
+    const l=$('#player-meta-linhagem'); if(l&&!l.placeholder) l.placeholder='Ex.: Roronoa, Sakazuki, Nefertari';
+    const e=$('#player-meta-edl'); if(e&&!e.placeholder) e.placeholder='Ex.: Santoryu (3 Espadas)';
+
+    const manualFirst=$('#player-buff-delta-for');
+    if(manualFirst && !$('#auto-buff-manual-warning')){
+      const row=manualFirst.closest('.row');
+      if(row) row.insertAdjacentHTML('beforebegin','<div class="system-note gold mb-3" id="auto-buff-manual-warning"><i class="bi bi-magic"></i><div><strong>Não digite de novo buffs permanentes de Raça, Linhagem ou EDL.</strong> Eles são puxados automaticamente do cadastro. Use estes campos só para treino, equipamento, comida, música, evento, buff temporário ou outra fonte que não esteja no cadastro.</div></div>');
+    }
+
+    const breakdown=$('#buff-breakdown');
+    if(breakdown && !$('#auto-buff-engine')){
+      breakdown.insertAdjacentHTML('afterend',`<div class="system-note mt-4" id="auto-buff-engine"><i class="bi bi-stars"></i><div class="w-100"><div class="d-flex justify-content-between align-items-center gap-2 flex-wrap"><strong>Buffs puxados automaticamente do cadastro</strong><button class="btn btn-sm btn-rpg-outline" id="btn-sync-auto-buffs" type="button"><i class="bi bi-arrow-repeat me-1"></i>Sincronizar agora</button></div><div class="small text-muted mt-1">Raça, linhagem e EDL reconhecidos são recalculados no Supabase. Bônus de Haki vão para Haki, fora dos 1000%. Buffs temporários/condicionais continuam manuais.</div><div class="mt-3" id="auto-buff-source-list"></div></div></div>`);
+    }
+  }
+
+  function renderAutoBuffSources(c) {
+    ensureBuildAutomationUI();
+    const host=$('#auto-buff-source-list'); if(!host) return;
+    const sources=Array.isArray(c?.autoBuffSources)?c.autoBuffSources:[];
+    if(!sources.length){host.innerHTML='<span class="small text-muted">Nenhuma fonte automática reconhecida ainda. Salve Raça, Linhagem e/ou EDL usando os nomes sugeridos.</span>';return;}
+    host.innerHTML=sources.map(src=>`<div class="history-entry py-2"><div class="d-flex justify-content-between gap-2 flex-wrap"><strong>${html(src.name||src.type||'Fonte')}</strong><span class="badge-soft badge-accent">${html(src.type||'automático')}</span></div><div class="small mt-1">${html(buffSourceText(src))}</div>${src.note?`<div class="small text-muted mt-1">${html(src.note)}</div>`:''}</div>`).join('');
+  }
+
+  async function syncAutoBuffs() {
+    const c=getActiveCharacter(); if(!c||!sb) return;
+    const {data,error}=await sb.rpc('sync_my_auto_buffs',{p_character_id:c.id});
+    if(error) return showToast(error.message.includes('function')?'Rode primeiro o SQL do motor de buffs automáticos no Supabase.':error.message,'danger');
+    await refreshOwn();
+    showToast(data?.changed?'Buffs automáticos recalculados e registrados.':'Buffs automáticos já estavam corretos.','success');
+  }
+
   function fillMetaForm(c) {
     const vals={ '#player-meta-faccao':c.faccao,'#player-meta-cargo':c.cargo,'#player-meta-berries':c.berries,'#player-meta-raca':c.raca,'#player-meta-linhagem':c.linhagem,'#player-meta-profissao':c.profissao,'#player-meta-subprofissao':c.subprofissao,'#player-meta-edl':c.edl,'#player-meta-akuma':c.akuma?.nome,'#player-meta-localizacao':c.localizacao,'#player-meta-navio':c.navio };
     Object.entries(vals).forEach(([sel,v])=>{ if ($(sel)) $(sel).value=v??''; });
@@ -361,7 +427,8 @@
     Object.entries(map).forEach(([sel,v])=>{ if ($(sel)) { if ('value' in $(sel) && $(sel).tagName==='INPUT') $(sel).value=v; else $(sel).textContent=v; } });
     ATTRS.forEach(([key,,short])=>{ if ($(`#attr-${key}`)) $(`#attr-${key}`).textContent=fmt(c.atributos[key]); });
     if ($('#char-buff-bar')) $('#char-buff-bar').style.width=`${Math.min(100,(buffs/GLOBAL_COMMON_BUFF_CAP)*100)}%`;
-    if ($('#buff-breakdown')) $('#buff-breakdown').innerHTML=ATTRS.map(([key,,short])=>`<div class="buff-pill"><span>${short}</span><strong>+${fmt(c.buffs[key])}%</strong></div>`).join('');
+    if ($('#buff-breakdown')) $('#buff-breakdown').innerHTML=ATTRS.map(([key,,short])=>`<div class="buff-pill"><span>${short}</span><strong>+${fmt(c.buffs[key])}%</strong><small class="d-block text-muted">auto +${fmt(c.autoBuffs?.[key])}% • manual +${fmt(c.manualBuffs?.[key])}%</small></div>`).join('');
+    renderAutoBuffSources(c);
     fillMetaForm(c); renderHistory(c);
     const last=localStorage.getItem(LS.LAST_SUMMARY); if (last && $('#player-whatsapp-summary')) $('#player-whatsapp-summary').value=last;
   }
@@ -393,7 +460,7 @@
     const values={ faccao:esc($('#player-meta-faccao')?.value),cargo:esc($('#player-meta-cargo')?.value),berries:n($('#player-meta-berries')?.value),raca:esc($('#player-meta-raca')?.value),linhagem:esc($('#player-meta-linhagem')?.value),profissao:esc($('#player-meta-profissao')?.value),subprofissao:esc($('#player-meta-subprofissao')?.value),edl:esc($('#player-meta-edl')?.value),akuma_nome:esc($('#player-meta-akuma')?.value),localizacao:esc($('#player-meta-localizacao')?.value),navio:esc($('#player-meta-navio')?.value) };
     const {data,error}=await sb.rpc('player_metadata_update',{p_character_id:c.id,p_values:values,p_origin:origin,p_reference:reference}); if(error) return showToast(error.message,'danger');
     const summary=buildWhatsApp(rowToCharacter(data.character),data.log); localStorage.setItem(LS.LAST_SUMMARY,summary); if($('#player-meta-note')) $('#player-meta-note').value='';
-    await refreshOwn(); if($('#player-whatsapp-summary')) $('#player-whatsapp-summary').value=summary; showToast('Dados atualizados e registrados para auditoria.','success');
+    await refreshOwn(); if($('#player-whatsapp-summary')) $('#player-whatsapp-summary').value=summary; showToast('Dados atualizados; buffs do cadastro foram recalculados automaticamente e registrados para auditoria.','success');
   }
 
   async function markCharacterDead() {
@@ -437,7 +504,7 @@
     if(!row){host.innerHTML='<div class="system-note"><i class="bi bi-person-x"></i><div>Nenhum personagem ativo selecionado.</div></div>'; renderHistory(null,'#admin-history'); return;}
     localStorage.setItem(LS.ADMIN_SELECTED_USER,owner); localStorage.setItem(LS.ADMIN_SELECTED_CHAR,charId);
     const logs=state.adminLogs.filter(l=>l.character_id===row.id); const c=rowToCharacter(row,logs); const total=getTotalBruto(c),buffs=getCommonBuffTotal(c),pend=logs.filter(l=>l.audit_status==='Pendente').length;
-    host.innerHTML=`<div class="admin-char-head"><div><div class="kicker">${html(p?.username||'Conta')}</div><h3>${factionIcon(c.faccao)} ${html(c.nome)}</h3><p>${html(c.faccao)} • ${html(c.cargo||'Sem cargo/recompensa')}</p></div><div class="text-end"><span class="badge-soft badge-accent">${fmt(total)} pts brutos</span><span class="badge-soft ${buffs>=GLOBAL_COMMON_BUFF_CAP?'badge-danger':'badge-gold'} ms-2">${buffs}/${GLOBAL_COMMON_BUFF_CAP}% buff</span><span class="badge-soft ${pend?'badge-gold':'badge-accent'} ms-2">${pend} pendente(s)</span></div></div><div class="shell-grid grid-3 mt-3">${ATTRS.map(([k,,s])=>`<div class="segment"><div class="text-muted small">${s}</div><strong>${fmt(c.atributos[k])}</strong><span class="d-block small text-muted">Buff +${fmt(c.buffs[k])}%</span></div>`).join('')}</div><div class="system-note gold mt-3"><i class="bi bi-lightning-charge"></i><div><strong>Fora do teto:</strong> Haki +${fmt(c.haki.bonusPercent)}% e Akuma +${fmt(c.akuma.bonusPercent)}%.</div></div>`;
+    host.innerHTML=`<div class="admin-char-head"><div><div class="kicker">${html(p?.username||'Conta')}</div><h3>${factionIcon(c.faccao)} ${html(c.nome)}</h3><p>${html(c.faccao)} • ${html(c.cargo||'Sem cargo/recompensa')}</p></div><div class="text-end"><span class="badge-soft badge-accent">${fmt(total)} pts brutos</span><span class="badge-soft ${buffs>=GLOBAL_COMMON_BUFF_CAP?'badge-danger':'badge-gold'} ms-2">${buffs}/${GLOBAL_COMMON_BUFF_CAP}% buff</span><span class="badge-soft ${pend?'badge-gold':'badge-accent'} ms-2">${pend} pendente(s)</span></div></div><div class="shell-grid grid-3 mt-3">${ATTRS.map(([k,,s])=>`<div class="segment"><div class="text-muted small">${s}</div><strong>${fmt(c.atributos[k])}</strong><span class="d-block small text-muted">Buff +${fmt(c.buffs[k])}%</span></div>`).join('')}</div><div class="system-note gold mt-3"><i class="bi bi-lightning-charge"></i><div><strong>Fora do teto:</strong> Haki +${fmt(c.haki.bonusPercent)}% e Akuma +${fmt(c.akuma.bonusPercent)}%.</div></div>${c.autoBuffSources?.length?`<div class="system-note mt-3"><i class="bi bi-stars"></i><div><strong>Fontes automáticas:</strong><div class="small mt-2">${c.autoBuffSources.map(src=>`${html(src.name||src.type)} — ${html(buffSourceText(src))}`).join('<br>')}</div></div></div>`:''}`;
     renderHistory(c,'#admin-history',40);
   }
 
@@ -625,11 +692,11 @@
   function bindButtons(){ensureUtilityModals();const bind=(sel,event,fn)=>{const el=$(sel);if(el&&!el.dataset.bound){el.dataset.bound='1';el.addEventListener(event,fn);}};
     bind('#btn-login','click',()=>openModal('loginModal'));bind('#btn-cadastro','click',()=>openModal('cadastroModal'));bind('#btn-player-login','click',()=>openModal('loginModal'));bind('#btn-player-cadastro','click',()=>openModal('cadastroModal'));bind('#btn-novo-personagem','click',()=>openModal('criarPersonagemModal'));bind('#hero-btn-novo-personagem','click',()=>openModal('criarPersonagemModal'));bind('#btn-painel-usuario','click',()=>location.href=`${ROOT}Pages/player.html`);bind('#btn-perfil','click',()=>location.href=`${ROOT}Pages/player.html`);bind('#btn-logout-top','click',deslogar);bind('#btn-logout','click',deslogar);bind('#btn-character-death','click',markCharacterDead);
     bind('#login-form','submit',e=>{e.preventDefault();realizarLogin();});bind('#cadastro-form','submit',e=>{e.preventDefault();realizarCadastro();});bind('#character-form','submit',e=>{e.preventDefault();salvarNovoPersonagem();});bind('#login-submit','click',realizarLogin);bind('#cadastro-submit','click',realizarCadastro);bind('#create-character-submit','click',salvarNovoPersonagem);
-    bind('#select-personagem-ativo','change',e=>{localStorage.setItem(LS.ACTIVE,e.target.value);renderAll();});bind('#player-update-form','submit',e=>{e.preventDefault();submitPlayerMechanicalUpdate();});bind('#player-meta-form','submit',e=>{e.preventDefault();submitPlayerMetadata();});bind('#btn-copy-player-whatsapp','click',()=>copyText('#player-whatsapp-summary'));
+    bind('#select-personagem-ativo','change',e=>{localStorage.setItem(LS.ACTIVE,e.target.value);renderAll();});bind('#player-update-form','submit',e=>{e.preventDefault();submitPlayerMechanicalUpdate();});bind('#player-meta-form','submit',e=>{e.preventDefault();submitPlayerMetadata();});bind('#btn-copy-player-whatsapp','click',()=>copyText('#player-whatsapp-summary'));bind('#btn-sync-auto-buffs','click',syncAutoBuffs);
     bind('#admin-player-select','change',()=>{localStorage.setItem(LS.ADMIN_SELECTED_USER,$('#admin-player-select').value);localStorage.removeItem(LS.ADMIN_SELECTED_CHAR);renderAdminSelectors();renderAdminCharacter();});bind('#admin-character-select','change',()=>{localStorage.setItem(LS.ADMIN_SELECTED_CHAR,$('#admin-character-select').value);renderAdminCharacter();});bind('#admin-audit-filter','change',renderAdminAudit);bind('#admin-audit-search','input',renderAdminAudit);bind('#admin-audit-feed','click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;if(b.dataset.action==='audit')auditChange(b.dataset.id,b.dataset.status);if(b.dataset.action==='open'){localStorage.setItem(LS.ADMIN_SELECTED_USER,b.dataset.user);localStorage.setItem(LS.ADMIN_SELECTED_CHAR,b.dataset.char);renderAdminSelectors();renderAdminCharacter();$('#admin-character-summary')?.scrollIntoView({behavior:'smooth',block:'center'});}});bind('#admin-correction-form','submit',e=>{e.preventDefault();submitAdminCorrection();});bind('#btn-copy-admin-correction','click',()=>copyText('#admin-correction-summary'));bind('#btn-export-backup','click',exportBackup);bind('#import-backup-file','change',()=>showToast('Importação pelo navegador foi desativada no modo compartilhado para preservar a integridade do banco. Use o Supabase/SQL para restaurações.','warning'));bind('#btn-claim-admin-code','click',activateAdminFromPlayerPage);bind('#btn-owner-save-code','click',ownerSaveTeamCode);bind('#btn-owner-toggle-signup','click',ownerToggleAdminSignup);bind('#owner-team-members','click',e=>{const b=e.target.closest('button[data-owner-role]');if(b)ownerChangeRole(b.dataset.user,b.dataset.ownerRole);});[['#toggle-team-code','#cadCodigo'],['#toggle-login-team-code','#loginCodigo'],['#toggle-activation-code','#team-access-code'],['#toggle-owner-team-code','#owner-team-code']].forEach(([btnSel,inputSel])=>bind(btnSel,'click',()=>{const inp=$(inputSel);if(!inp)return;inp.type=inp.type==='password'?'text':'password';const i=$(btnSel)?.querySelector('i');if(i)i.className=inp.type==='password'?'bi bi-eye':'bi bi-eye-slash';}));bindSearch();}
 
   function setActiveNav(){const page=document.body.dataset.page;$$('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));}
-  function renderAll(){renderAuthArea();renderHomeData();renderPlayerPage();renderTeamAccess();renderAdminPage();renderOwnerTeamPanel();bindButtons();}
+  function renderAll(){ensureBuildAutomationUI();renderAuthArea();renderHomeData();renderPlayerPage();renderTeamAccess();renderAdminPage();renderOwnerTeamPanel();bindButtons();}
 
   Object.assign(window,{OPA:{state,MAX_CHARACTERS,GLOBAL_COMMON_BUFF_CAP,ATTRS,MARINE_RANKS,getActiveCharacter,getTotalBruto,getCommonBuffTotal,refresh:refreshOwn},realizarCadastro,realizarLogin,deslogar,salvarNovoPersonagem});
 
@@ -672,7 +739,7 @@
   }
 
   document.addEventListener('DOMContentLoaded',async()=>{
-    corrigirConsultaPublicaMobile();ensureUtilityModals();setActiveNav();bindButtons();showBackendBanner();
+    corrigirConsultaPublicaMobile();ensureUtilityModals();ensureBuildAutomationUI();setActiveNav();bindButtons();showBackendBanner();
     if(!sb){renderAll();return;}
     const {data:{session}}=await sb.auth.getSession();state.authUser=session?.user||null;
     sb.auth.onAuthStateChange((_event,session)=>{state.authUser=session?.user||null;setTimeout(()=>refreshOwn(),0);});
