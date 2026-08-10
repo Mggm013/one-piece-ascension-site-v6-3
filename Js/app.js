@@ -633,8 +633,46 @@
 
   Object.assign(window,{OPA:{state,MAX_CHARACTERS,GLOBAL_COMMON_BUFF_CAP,ATTRS,MARINE_RANKS,getActiveCharacter,getTotalBruto,getCommonBuffTotal,refresh:refreshOwn},realizarCadastro,realizarLogin,deslogar,salvarNovoPersonagem});
 
+  function corrigirConsultaPublicaMobile(){
+    const PUBLIC_SHEET='https://docs.google.com/spreadsheets/d/1PjsWvj8FpNpk8HFtG4uuGolLl5-o-AnTDQOOOMG_88s/edit?usp=drivesdk';
+    const OLD_SHEET_IDS=['17NQW6O2eS8KofLsCYYWFl3ETdNahh9C6eidGI3MOdno'];
+    const path=location.pathname.toLowerCase();
+    const isAvailabilityPage=/(?:\/|^)(racas|linhagens)\.html$/.test(path);
+    const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+
+    // Remove o atalho "Consultar disponibilidade" dos menus em todas as páginas.
+    document.querySelectorAll('.dropdown-menu a').forEach(a=>{
+      if(norm(a.textContent).includes('consultar disponibilidade')){
+        const li=a.closest('li');
+        (li||a).remove();
+      }
+    });
+
+    // Corrige o endereço da consulta pública e deixa o bloco apenas em Raças/Linhagens.
+    document.querySelectorAll('a[href*="docs.google.com/spreadsheets"]').forEach(a=>{
+      const href=a.getAttribute('href')||'';
+      const isOpaAvailability=OLD_SHEET_IDS.some(id=>href.includes(id)) || href.includes('1PjsWvj8FpNpk8HFtG4uuGolLl5-o-AnTDQOOOMG_88s');
+      if(!isOpaAvailability) return;
+
+      if(isAvailabilityPage){
+        a.setAttribute('href',PUBLIC_SHEET);
+        a.setAttribute('target','_blank');
+        a.setAttribute('rel','noopener noreferrer');
+        return;
+      }
+
+      const menuItem=a.closest('.dropdown-menu li');
+      if(menuItem){ menuItem.remove(); return; }
+
+      const block=a.closest('.availability-callout, .system-note');
+      if(block && /disponibilidade|planilha publica|ocupacao/.test(norm(block.textContent))){
+        block.remove();
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded',async()=>{
-    ensureUtilityModals();setActiveNav();bindButtons();showBackendBanner();
+    corrigirConsultaPublicaMobile();ensureUtilityModals();setActiveNav();bindButtons();showBackendBanner();
     if(!sb){renderAll();return;}
     const {data:{session}}=await sb.auth.getSession();state.authUser=session?.user||null;
     sb.auth.onAuthStateChange((_event,session)=>{state.authUser=session?.user||null;setTimeout(()=>refreshOwn(),0);});
