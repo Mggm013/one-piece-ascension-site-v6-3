@@ -41,7 +41,7 @@
 
   const FACTION_CONFIG = {
     Padrao: { themeClass: '', logo: `${ROOT}Icons/logo-op-ascension.png`, avatar: `${ROOT}Icons/hero-placeholder.svg`, label: 'Central do Mar' },
-    Pirata: { themeClass: 'theme-pirata', logo: `${ROOT}Icons/piratas-ascension.png`, avatar: `${ROOT}Icons/piratas.svg`, label: 'Piratas' },
+    Pirata: { themeClass: 'theme-pirata', logo: `${ROOT}Icons/piratas-ascension-v2.png?v=2`, avatar: `${ROOT}Icons/piratas.svg`, label: 'Piratas' },
     Marinha: { themeClass: 'theme-marinha', logo: `${ROOT}Icons/marinha-ascension.png`, avatar: `${ROOT}Icons/marinha.svg`, label: 'Marinha' },
     Mafia: { themeClass: 'theme-mafia', logo: `${ROOT}Icons/mafia-ascension.png`, avatar: `${ROOT}Icons/mafia.svg`, label: 'Máfia' },
     Cacador: { themeClass: 'theme-cacador', logo: `${ROOT}Icons/cacadores-ascension.png`, avatar: `${ROOT}Icons/cacadores.svg`, label: 'Caçadores' },
