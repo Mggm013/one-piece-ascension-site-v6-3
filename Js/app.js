@@ -83,7 +83,7 @@
     const el = document.createElement('div');
     el.className = `surface-card reveal ${cls}`;
     el.style.maxWidth = '420px';
-    el.innerHTML = `<strong class="d-block mb-1">One Piece Ascension v6.3</strong><span class="text-muted">${html(message)}</span>`;
+    el.innerHTML = `<strong class="d-block mb-1">One Piece Ascension</strong><span class="text-muted">${html(message)}</span>`;
     host.appendChild(el);
     setTimeout(() => { el.style.opacity='0'; el.style.transform='translateY(8px)'; el.style.transition='all .35s ease'; }, 3200);
     setTimeout(() => el.remove(), 3700);

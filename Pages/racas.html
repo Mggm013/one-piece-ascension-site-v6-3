@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-
+html
 <html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>One Piece Ascension • Raças — Canônicas e Não-Canônicas</title><meta content="Compare todos os buffs, debuffs e passivas raciais antes de definir a origem do personagem." name="description"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/><link href="../Css/codigos.css" rel="stylesheet"/></head><body data-page="system" data-root="../" id="site-body"><nav class="navbar navbar-expand-xxl shell-nav sticky-top"><div class="container-fluid px-3 px-lg-4">
 <a class="navbar-brand d-flex align-items-center gap-3" href="../index.html"><div class="brand-pip"><i class="bi bi-compass-fill"></i></div><img alt="One Piece Ascension" id="navbar-logo" src="../Icons/logo-op-ascension.png"/></a>
 <button aria-controls="navshell" aria-expanded="false" aria-label="Abrir menu" class="navbar-toggler" data-bs-target="#navshell" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 <div class="collapse navbar-collapse" id="navshell"><ul class="navbar-nav me-auto mb-2 mb-xxl-0 align-items-xxl-center">
 <li class="nav-item"><a class="nav-link" data-nav="home" href="../index.html">Início</a></li>
 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">O RPG</a><ul class="dropdown-menu">
-<li><a class="dropdown-item" href="../Pages/inicio-historia.html">Início &amp; História</a></li><li><a class="dropdown-item" href="../Pages/tutorial.html">Introdução &amp; Tutorial</a></li><li><a class="dropdown-item" href="../Pages/pacote-iniciante.html">Pacote Iniciante</a></li><li><a class="dropdown-item fw-bold" href="../Pages/regras-v6.html">Regras Centrais v6.0</a></li></ul></li>
+<li><a class="dropdown-item" href="../Pages/inicio-historia.html">Início &amp; História</a></li><li><a class="dropdown-item" href="../Pages/tutorial.html">Introdução &amp; Tutorial</a></li><li><a class="dropdown-item" href="../Pages/pacote-iniciante.html">Pacote Iniciante</a></li><li><a class="dropdown-item fw-bold" href="../Pages/regras.html">Regras Centrais</a></li></ul></li>
 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ficha &amp; Evolução</a><ul class="dropdown-menu mega-menu">
 <li><h6 class="dropdown-header">Criação</h6></li><li><a class="dropdown-item" href="../Pages/criacao-ficha.html">Criação da Ficha</a></li><li><a class="dropdown-item" href="../Pages/racas.html">Raças</a></li><li><a class="dropdown-item" href="../Pages/linhagens.html">Famílias / Linhagens</a></li><li><a class="dropdown-item" href="../Pages/profissoes.html">Profissões</a></li><li><a class="dropdown-item" href="../Pages/edl.html">Estilos de Luta</a></li>
 <li><h6 class="dropdown-header">Progressão</h6></li><li><a class="dropdown-item" href="../Pages/evolucao.html">Evolução</a></li><li><a class="dropdown-item" href="../Pages/pericia-missoes.html">Perícia &amp; Missões</a></li><li><a class="dropdown-item" href="../Pages/arcos.html">Arcos</a></li></ul></li>
@@ -23,14 +22,133 @@
 <div class="d-flex align-items-center gap-2" id="area-auth-botoes"><button class="btn btn-rpg-outline btn-sm" id="btn-login">Entrar</button><button class="btn btn-rpg btn-sm" id="btn-cadastro">Cadastrar</button></div>
 <div class="d-none align-items-center gap-3" id="area-auth-usuario"><div class="d-none d-xl-flex flex-column text-end me-2"><span class="text-muted small">Facção ativa</span><strong class="faction-tag" id="current-faction-badge">Central do Mar</strong></div><div class="avatar-ring"><img alt="Avatar" aria-expanded="false" class="avatar-circle" data-bs-toggle="dropdown" id="avatar-display" src="../Icons/hero-placeholder.svg"/></div><ul class="dropdown-menu dropdown-menu-end mt-2"><li><button class="dropdown-item" id="btn-painel-usuario"><i class="bi bi-person-vcard me-2"></i>Meus personagens</button></li><li><button class="dropdown-item" id="btn-perfil"><i class="bi bi-bar-chart-line me-2"></i>Meu perfil</button></li><li><button class="dropdown-item" id="btn-logout-top"><i class="bi bi-box-arrow-right me-2"></i>Sair</button></li></ul></div>
 </div></div></nav><main>
-<section class="system-hero"><div class="container px-3 px-lg-4"><div class="system-hero-card"><div class="system-icon"><i class="bi bi-people-fill"></i></div><div><div class="kicker">Ficha &amp; Evolução</div><h1>Raças — Canônicas e Não-Canônicas</h1><p>Todas as raças, buffs, debuffs e passivas que aparecem na tabela oficial.</p></div></div></div></section>
-<section class="container px-3 px-lg-4 pb-5"><div class="system-layout"><aside class="system-toc"><div class="toc-title">Nesta página</div><a href="#regras">Regras Gerais de Raças</a><a href="#tabela">Raças — Buffs, Debuffs e Passivas</a><a href="#observacao">Referência de requisito</a></aside><article class="system-content"><section class="content-section" id="regras"><div class="section-eyebrow">Sistema 04</div><h2>Regras Gerais de Raças</h2><div class="system-note gold v6-inline-note"><i class="bi bi-stars"></i><div><strong>v6:</strong> buffs raciais positivos de atributo contam no orçamento global de 1000%. Bônus que sejam especificamente Haki ficam no campo de Haki, fora do teto. Debuffs continuam sendo penalidades e não liberam orçamento.</div></div><p>Cada raça tem buffs permanentes em atributos (% sobre os pontos atuais) e debuffs que equilibram. Habilidades de raça são passivas — não precisam ser declaradas. O narrador aplica automaticamente.</p></section><section class="content-section" id="tabela"><h2>Raças — Buffs, Debuffs e Passivas</h2><div class="table-scroll"><table class="table-rpg wide-table"><thead><tr><th scope="col">Raça</th><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva Especial</th></tr></thead><tbody><tr><td>👨 Humanos</td><td>+10% Haki (ambos os tipos treináveis).</td><td>Nenhum.</td><td>Vontade de Ferro: 1x/combate relança um teste de Haki falho.</td></tr><tr><td>🦈 Tritões (Fishmen)</td><td>+30% Força / +10% Agilidade / +5% Resistência / Velocidade dobrada na água.</td><td>-10% Força e -10% Agilidade fora d’água; -40% Resistência a Kairosheki.</td><td>Karatê Tritão: pode usar umidade do ar. Escamas Rígidas: +5% Resistência vs. ataques sem Haki.</td></tr><tr><td>👼 Skypieans / Shandians</td><td>Skypiean: +35% Agilidade / +30% Haki da Observação. Shandian: +20% Agilidade / +40% Precisão / +10% Resistência.</td><td>Nenhum.</td><td>Mantra (Haki da Observação passivo). Voam (Skypiean) ou recebem bônus com arco (Shandian).</td></tr><tr><td>🧚 Tontattas (Anões)</td><td>+45% Agilidade / +20% Inteligência.</td><td>-30% Resistência.</td><td>Força Insana para carregar. Buraco de Tontatta.</td></tr><tr><td>🦶 Gigantes (Elbaf)</td><td>+60% Força / +40% Resistência.</td><td>-30% Agilidade.</td><td>Espírito de Elbaf: ataques causam tremor.</td></tr><tr><td>🌊 Sereias / Sereianos</td><td>+20% Agilidade / Velocidade triplicada na água / +15% Espírito.</td><td>-20% Agilidade / -10% Força fora d’água; não podem lutar fora d’água até Nível Avançado.</td><td>Voz da Sereia.</td></tr><tr><td>🐺 Minks</td><td>+20% Força / +20% Agilidade / +10% Resistência.</td><td>Nenhum base.</td><td>Electro (choque). SULONG (lua cheia).</td></tr><tr><td>🐍 Kuja</td><td>Kuja: +15% Precisão / +15% Haki. Rainha Kuja: +25% Haki / +15% Força.</td><td>Nenhum.</td><td>Kuja: Infusão Haki. Rainha: Mero Mero.</td></tr><tr><td>🤖 Ciborgues</td><td>+20% Força / +10% Resistência.</td><td>-15% atributos em água salgada.</td><td>Sistema de Mods (Invenções).</td></tr></tbody></table></div></section><section class="content-section" id="observacao"><h2>Referência de requisito</h2><div class="system-note warning"><i class="bi bi-exclamation-triangle-fill"></i><div>A linhagem <strong>Newgate</strong> exige a raça <strong>Bucaneiro</strong>, porém o documento fornecido não apresenta uma linha própria com buffs, debuffs ou passiva para Bucaneiros. O site não inventa esses valores.</div></div></section></article></div></section></main><footer class="footer-shell"><div class="container px-3 px-lg-4"><div class="footer-grid"><div><img alt="One Piece Ascension" class="footer-logo" src="../Icons/logo-op-ascension.png"/><p class="text-muted mt-3">Central de consulta dos sistemas oficiais do RPG.</p></div><div><h6>Consulta</h6><a href="../Pages/racas.html">Raças</a><a href="../Pages/linhagens.html">Linhagens</a><a href="../Pages/loja.html">Loja</a></div><div><h6>Sistemas</h6><a href="../Pages/combate.html">Combate</a><a href="../Pages/navios.html">Navios</a><a href="../Pages/poderes.html">Poderes</a></div></div><div class="footer-bottom">© 2026 One Piece Ascension.</div></div></footer>
+<section class="system-hero"><div class="container px-3 px-lg-4"><div class="system-hero-card"><div class="system-icon"><i class="bi bi-people-fill"></i></div><div><div class="kicker">Ficha &amp; Evolução</div><h1>Raças — Canônicas e Não-Canônicas</h1><p>Raças comuns, raras e não-canônicas, com buffs, debuffs, passivas e limites de slot.</p></div></div></div></section>
+<section class="container px-3 px-lg-4 pb-5"><div class="system-layout"><aside class="system-toc"><div class="toc-title">Nesta página</div><a href="#integracao-racial">Regras Gerais</a><a href="#racas-completas">Raças completas</a></aside><article class="system-content"><section class="content-section" id="integracao-racial"><h2>Regras Gerais de Raças</h2><ul class="rule-list"><li>Buffs raciais positivos de atributo contam no orçamento global de 1000%.</li><li>Bônus especificamente de Haki ficam no campo de Haki, fora do teto global.</li><li>Passivas sem percentual, como voo, respiração aquática ou visão especial, não viram Pontos Brutos.</li><li>Debuffs raciais continuam sendo penalidades e não liberam espaço de buff.</li></ul></section><section class="content-section complete-system" id="racas-completas"><h2>Raças, buffs, debuffs e passivas</h2>
+<h3 class="system-subtitle">Regras Gerais de Raças</h3>
+<ul class="rule-list">
+<li>Cada raça tem buffs permanentes em atributos (% sobre os pontos atuais) e debuffs que equilibram.</li>
+<li>Raças Raras têm slots limitados (indicados). Quando cheio, nenhum novo player pode escolher aquela raça até abrir vaga.</li>
+<li>Habilidades de raça são passivas — não precisam ser declaradas. O narrador aplica automaticamente.</li>
+</ul>
+<h3 class="system-subtitle system-subtitle--caps">RAÇAS COMUNS</h3>
+<h3 class="system-subtitle">👨 Humanos</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva Especial</th></tr></thead>
+<tbody><tr><td>+10% Haki (ambos os tipos treináveis)</td><td>Nenhum</td><td>Vontade de Ferro: 1x/combate relança um teste de Haki falho. Podem aprender todos os 3 tipos de Haki.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🦈 Tritões (Fishmen)</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva Especial</th></tr></thead>
+<tbody><tr><td>+30% Força / +10% Agilidade / +5% Resistência / Vel. dobrada na água</td><td>-10% For e -10% Agi fora d'água; -40% Resistência a Kairosheki</td><td>Karatê Tritão: pode usar umidade do ar como substituto de água em climas úmidos. Escamas Rígidas: +5% Resistência vs ataques físicos sem Haki.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">👼 Skypieans / Shandians</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Sub-raça</th><th scope="col">Buffs</th><th scope="col">Passiva</th></tr></thead>
+<tbody><tr><td>Skypiean</td><td>+35% Agilidade / +30% Haki Observação</td><td>Mantra (Haki Obs. passivo em 20m sem treinamento formal). Voam com asas — ataques aéreos +10% dano.</td></tr><tr><td>Shandian / Birka</td><td>+20% Agilidade / +40% Precisão / +10% Resistência</td><td>Mesmo Mantra. Arcos e bestas como arma nativa — +15% precisão com armas de arremesso.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🧚 Tontattas (Anões)</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva</th></tr></thead>
+<tbody><tr><td>+45% Agilidade / +20% Inteligência</td><td>-30% Resistência</td><td>Força Insana: +30% força para carregar/arremessar objetos (não dano direto). Buraco de Tontatta: 1x/missão teleporta até 10m enterrando-se.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🦶 Gigantes (Elbaf)</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva</th></tr></thead>
+<tbody><tr><td>+60% Força / +40% Resistência</td><td>-30% Agilidade</td><td>Espírito de Elbaf: ataques causam tremor. Inimigos no chão recebem -10% Agi por 2 turnos em ataques de área.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🌊 Sereias / Sereiano</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva</th></tr></thead>
+<tbody><tr><td>+20% Agilidade / Vel. triplicada na água / +15% Espírito</td><td>-20% Agi / -10% Força fora d'água; Não podem lutar fora da água até Nível Avançado</td><td>Voz da Sereia: 1x/evento acalma seres marinhos. Fêmeas: potencial canônico de Poseidon (Arco ADM).</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🐺 Minks</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva + Sulong</th></tr></thead>
+<tbody><tr><td>+20% Força / +20% Agilidade / +10% Resistência</td><td>Nenhum base</td><td>Electro: 15% de chance de aplicar Choque em ataques físicos (-10% precisão inimigo). SULONG (lua cheia): +50% For/Agi/Res por 3 turnos. Pós-Sulong: -15% todos físicos por 3 turnos. Cooldown: 1 semana de RPG.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🐍 Kuja</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Sub-tipo</th><th scope="col">Buffs</th><th scope="col">Passiva</th></tr></thead>
+<tbody><tr><td>Kuja</td><td>+15% Precisão (arco) / +15% Haki</td><td>Infusão de Haki em projéteis desde o nível básico — único poder disponível de nascença.</td></tr><tr><td>Rainha Kuja</td><td>+25% Haki / +15% Força</td><td>Mero Mero: 1x/combate testa petrificar alvo (d100, 70+). Pode ter serpentes como companheiras de combate.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🤖 Ciborgues</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Sistema de Mods</th></tr></thead>
+<tbody><tr><td>+20% Força / +10% Resistência</td><td>-15% atributos em água salgada</td><td>3 modificações Tier 3 OU 4 Tier 2 OU 7 Tier 1 (combinações permitidas). Ver seção de Invenções.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle system-subtitle--caps">RAÇAS RARAS</h3>
+<h3 class="system-subtitle">🧊 Lunaria (Slot: 1/5)</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Estado</th><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva</th></tr></thead>
+<tbody><tr><td>Chamas Acesas</td><td>+50% Resistência (impervio a dano leve)</td><td>-30% Agilidade</td><td>Raça Extinta: NPCs reconhecem e ficam intimidados. Pode voar.</td></tr><tr><td>Chamas Apagadas</td><td>+50% Agilidade + técnicas de voo</td><td>Vulnerável a dano normal</td><td></td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">👁️ Três Olhos (Slot: 0/5)</h3>
+<ul class="rule-list">
+<li>Buffs: +20% Haki base / +15% Inteligência</li>
+<li>Passiva: Falso Haki de Observação básico desde o início.</li>
+<li>Terceiro Olho (25.000+ pts Haki): leem Poneglyphs naturalmente — único poder exclusivo que nenhuma outra raça obtém.</li>
+</ul>
+<h3 class="system-subtitle">💪 Bucaneiros (Slot: 2/5)</h3>
+<ul class="rule-list">
+<li>+40% Força / +20% Resistência</li>
+<li>Chance de Haki do Conquistador: 25% (outros: 10%)</li>
+<li>Linhagem Newgate: começa com 500 pts de Haki alocados.</li>
+<li>Canônico: são uma raça quase extinta devido ao Governo Mundial — a ficha deve refletir isso narrativamente.</li>
+</ul>
+<h3 class="system-subtitle">👺 Oni (Slot: 2/5)</h3>
+<ul class="rule-list">
+<li>+50% Força / +30% Resistência / +10% Agilidade</li>
+<li>Debuff: -5% todos atributos a cada tentativa de usar Haki (resistência da raça ao Haki — lore de Kaido)</li>
+<li>Passiva: Resistência Natural a venenos e doenças — não são afetados por venenos fracos.</li>
+</ul>
+<h3 class="system-subtitle">🌙 Gigante Ancestral (Slot: 0/5)</h3>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Passiva Especial</th></tr></thead>
+<tbody><tr><td>+80% Força / +60% Resistência</td><td>-60% Agilidade</td><td>Terremoto: ao bater no chão com força, gera tremor em 20m — inimigos menores caem por 1 turno.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle system-subtitle--caps">RAÇAS NÃO-CANÔNICAS</h3>
+<h3 class="system-subtitle">🧸 Entropianos</h3>
+<p>Autômatos vivos feitos de fragmentos de corpos costurados. Memória coletiva dos fragmentos.</p>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Buffs</th><th scope="col">Debuffs</th><th scope="col">Sistema de Remendo (Único)</th></tr></thead>
+<tbody><tr><td>+25% Força / +10% Agi / +15% Resistência</td><td>-15% Int / -10% Precisão. Fogo: +20% dano recebido.</td><td>Reorganização: 1x/combate destaca membro, imuniza dano nessa parte por 1 turno. Extensão: membros estendem até 3x. Grotesco: inimigos &lt;30% Haki bruto testam coragem ou paralisam 1 turno. Regeneração: 5% HP/turno até 3x/combate.</td></tr></tbody>
+</table>
+</div>
+<h3 class="system-subtitle">🐍 Serpentines — Sistema de Tribos</h3>
+<p>Raça humanoide serpentil dividida em 5 tribos com habilidades únicas.</p>
+<div aria-label="Tabela de regras" class="table-scroll" role="region" tabindex="0">
+<table class="table table-dark table-rpg">
+<thead><tr><th scope="col">Tribo</th><th scope="col">Buffs</th><th scope="col">Debuff Frio</th><th scope="col">Habilidade Única</th></tr></thead>
+<tbody><tr><td>Anacondrai</td><td>+20% For / +15% Agi</td><td>10°C: -10% / 0°C: -25% / Neve: -50%</td><td>Constrição Relâmpago: ao acertar ataque físico, tenta imobilizar (d100, 60+) por 1 turno.</td></tr><tr><td>Hypnobrai</td><td>+20% Int / +15% Agi</td><td>Mesmos escalões</td><td>Hipnose: 10% de chance (até 25% com Int alta). Dura 3 turnos. Hipnotizados podem atacar aliados.</td></tr><tr><td>Fangpire</td><td>+20% Agi / +15% Resistência</td><td>Mesmos escalões</td><td>Armamento Subterrâneo: em ambientes de terra/madeira, surgem do solo com +20% dano no primeiro turno.</td></tr><tr><td>Constrictai</td><td>+25% Força / +10% Resistência</td><td>Mesmos escalões</td><td>Veneno Necrótico: morde aplica -5% força/turno por 3 turnos. Antídoto demora 1 dia.</td></tr><tr><td>Venomari</td><td>+20% Precisão / +15% Int</td><td>Mesmos escalões</td><td>Visão Termográfica: imunes a penalidades de escuridão. +15% precisão em baixa visibilidade.</td></tr></tbody>
+</table>
+</div>
+</section></article></div></section></main><footer class="footer-shell"><div class="container px-3 px-lg-4"><div class="footer-grid"><div><img alt="One Piece Ascension" class="footer-logo" src="../Icons/logo-op-ascension.png"/><p class="text-muted mt-3">Central de consulta dos sistemas oficiais do RPG.</p></div><div><h6>Consulta</h6><a href="../Pages/racas.html">Raças</a><a href="../Pages/linhagens.html">Linhagens</a><a href="../Pages/loja.html">Loja</a></div><div><h6>Sistemas</h6><a href="../Pages/combate.html">Combate</a><a href="../Pages/navios.html">Navios</a><a href="../Pages/poderes.html">Poderes</a></div></div><div class="footer-bottom">© 2026 One Piece Ascension.</div></div></footer>
 <div aria-hidden="true" class="modal fade" id="loginModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Acessar conta</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body"><label class="form-label">Nome de usuário</label><input class="form-control input-rpg mb-3" id="loginUser"/><label class="form-label">Senha</label><input class="form-control input-rpg mb-2" id="loginSenha" type="password"/><div class="text-danger small d-none mb-2" id="loginErro">Usuário ou senha incorretos.</div><button class="btn btn-rpg w-100" id="login-submit">Entrar</button></div></div></div></div>
 <div aria-hidden="true" class="modal fade" id="cadastroModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Criar conta</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body"><label class="form-label">Nome de usuário</label><input class="form-control input-rpg mb-3" id="cadUser"/><label class="form-label">Senha</label><input class="form-control input-rpg mb-3" id="cadSenha" type="password"/><label class="form-label">Código de convite da equipe <span class="text-muted">(opcional)</span></label><div class="input-group mb-2"><input class="form-control input-rpg" id="cadCodigo" placeholder="Deixe vazio caso não possua" type="password"/><button class="btn btn-rpg-outline" id="toggle-team-code" type="button"><i class="bi bi-eye"></i></button></div><div class="small text-muted mb-3">Use apenas se você recebeu um convite da equipe responsável.</div><label class="form-label">Foto de perfil <span class="text-muted">(opcional)</span></label><input accept="image/*" class="form-control input-rpg mb-2" id="cadFoto" type="file"/><div class="text-danger small d-none mb-2" id="cadErro">Este usuário já existe.</div><button class="btn btn-rpg w-100" id="cadastro-submit">Finalizar cadastro</button></div></div></div></div>
-
-<div aria-hidden="true" class="modal fade" id="criarPersonagemModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Registrar identidade no mar</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body"><div class="system-note warning mb-3">Limite da v6.0: 2 personagens ativos por player.</div><label class="form-label">Nome</label><input class="form-control input-rpg mb-3" id="newCharNome"/><label class="form-label">Facção inicial</label><select class="form-select input-rpg mb-3" id="newCharFaccao"><option value="Pirata">Pirata</option><option value="Marinha">Marinha</option><option value="Mafia">Máfia</option><option value="Cacador">Caçador de Recompensas</option><option value="Revolucionario">Revolucionário</option></select><label class="form-label">Recompensa / cargo inicial</label><input class="form-control input-rpg mb-3" id="newCharRecompensa"/><button class="btn btn-rpg w-100" id="create-character-submit">Criar personagem</button></div></div></div></div>
-
-
+<div aria-hidden="true" class="modal fade" id="criarPersonagemModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Registrar identidade no mar</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body"><div class="system-note warning mb-3">Limite da : 2 personagens ativos por player.</div><label class="form-label">Nome</label><input class="form-control input-rpg mb-3" id="newCharNome"/><label class="form-label">Facção inicial</label><select class="form-select input-rpg mb-3" id="newCharFaccao"><option value="Pirata">Pirata</option><option value="Marinha">Marinha</option><option value="Mafia">Máfia</option><option value="Cacador">Caçador de Recompensas</option><option value="Revolucionario">Revolucionário</option></select><label class="form-label">Recompensa / cargo inicial</label><input class="form-control input-rpg mb-3" id="newCharRecompensa"/><button class="btn btn-rpg w-100" id="create-character-submit">Criar personagem</button></div></div></div></div>
 <div class="toast-host" id="toast-host"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../Js/supabase-config.js"></script>

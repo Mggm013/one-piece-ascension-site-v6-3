@@ -740,7 +740,7 @@ body{overflow-x:hidden}
 @media(max-width:1199px){.system-layout{grid-template-columns:1fr}.system-toc{position:static;max-height:none;flex-direction:row;padding:1rem;overflow-x:auto}.systems-directory{grid-template-columns:repeat(2,minmax(0,1fr))}.card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:767px){.system-hero{padding-top:1.6rem}.system-hero-card{min-height:0;padding:1.55rem;border-radius:22px}.system-hero h1{font-size:clamp(2.35rem,12vw,4rem)}.content-section{padding:1.25rem;border-radius:20px}.content-section p,.content-section li{font-size:1rem;line-height:1.78}.systems-directory,.card-grid,.card-grid.cols-2{grid-template-columns:1fr}.expanded-hero{min-height:0}.expanded-hero .hero-content{padding:2.2rem 1.25rem}.expanded-hero h1{font-size:clamp(3.3rem,19vw,5.2rem)}.source-fidelity{align-items:flex-start}.system-note{padding:1.1rem}.data-card{min-height:160px}.table-rpg{min-width:720px}.wide-table{min-width:980px}}
 
-/* ===== V6: FICHA CENTRAL, BUFF GLOBAL, HISTÓRICO E PAINEL ADM ===== */
+/* ===== FICHA CENTRAL, BUFF GLOBAL, HISTÓRICO E PAINEL ADM ===== */
 .readonly-box{display:flex;align-items:center;min-height:38px;background:rgba(255,255,255,.035);color:var(--text)}
 .opa-progress{height:14px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:999px;overflow:hidden}
 .opa-progress .progress-bar{background:linear-gradient(90deg,var(--accent),#f2cf69);box-shadow:0 0 18px rgba(var(--accent-rgb),.35)}
@@ -754,9 +754,20 @@ body{overflow-x:hidden}
 @media(max-width:991px){.buff-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.admin-char-head{flex-direction:column}.admin-char-head .text-end{text-align:left!important}}
 @media(max-width:575px){.buff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.history-meta{align-items:flex-start;flex-direction:column;gap:.2rem}}
 
-/* ===== v6.1 — Auditoria de alterações dos players ===== */
+/* ===== Auditoria de alterações dos players ===== */
 .audit-change-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
 .audit-entry-card{padding:1.1rem;border:1px solid rgba(255,255,255,.08)}
 .audit-entry-card .segment{padding:.8rem .9rem}
 .audit-entry-card .history-summary{font-weight:650}
 @media(max-width:767px){.audit-change-grid{grid-template-columns:1fr}}
+
+
+/* Conteúdo completo restaurado: compatibilidade visual com os módulos originais */
+.complete-system .system-subtitle{font-family:Cinzel,serif;font-size:clamp(1.25rem,2.2vw,1.75rem);margin:2.25rem 0 1rem;color:var(--text);letter-spacing:-.015em}
+.complete-system .system-subtitle:first-of-type{margin-top:.5rem}
+.complete-system .system-subtitle--caps{font-size:.9rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);padding-top:1.5rem;border-top:1px solid var(--border)}
+.complete-system .table-scroll{overflow-x:auto;margin:1rem 0 1.6rem;border-radius:18px;border:1px solid var(--border)}
+.complete-system .table-rpg{margin:0;min-width:720px}
+.complete-system .system-note{margin:1rem 0 1.5rem}
+.complete-system .system-note strong{display:block;margin-bottom:.35rem;color:var(--accent)}
+.complete-system p{max-width:none}
