@@ -771,3 +771,23 @@ body{overflow-x:hidden}
 .complete-system .system-note{margin:1rem 0 1.5rem}
 .complete-system .system-note strong{display:block;margin-bottom:.35rem;color:var(--accent)}
 .complete-system p{max-width:none}
+
+
+/* =========================================================
+   MUNDO & NAVEGAÇÃO — MAPAS / ROTAS / FORÇA DOS MARES
+   ========================================================= */
+.map-link-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.map-link-card{display:flex;flex-direction:column;gap:5px;padding:16px 17px;border:1px solid var(--line-strong);border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(var(--accent-rgb),.035));text-decoration:none;color:var(--text);min-height:110px;transition:.2s ease}
+.map-link-card:hover,.map-link-card.active{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 12px 32px rgba(0,0,0,.22);color:var(--text)}
+.map-link-card i{font-size:1.25rem;color:var(--accent)}
+.map-link-card span{font-family:"Cinzel",serif;font-weight:700}
+.map-link-card small{color:var(--muted)}
+.section-heading-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:10px}
+.map-viewer-shell{overflow:hidden}
+.map-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0;position:sticky;top:86px;z-index:3;padding:8px;border:1px solid var(--line);border-radius:14px;background:rgba(7,19,24,.92);backdrop-filter:blur(14px)}
+.map-stage{width:100%;max-height:76vh;overflow:auto;border:1px solid var(--line-strong);border-radius:16px;background:#061116;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);overscroll-behavior:contain;touch-action:pan-x pan-y}
+.world-map-image{display:block;width:100%;height:auto;max-width:none;user-select:none;-webkit-user-drag:none;image-rendering:auto;transform-origin:top left}
+.map-stage:fullscreen{background:#031014;padding:12px;max-height:none}
+.map-stage:fullscreen .world-map-image{min-width:100%;width:auto;height:auto}
+.route-kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:760px){.map-link-grid{grid-template-columns:1fr}.map-controls{top:72px}.map-stage{max-height:70vh}.section-heading-row .btn{width:100%}.route-kpi-grid{grid-template-columns:1fr}}
