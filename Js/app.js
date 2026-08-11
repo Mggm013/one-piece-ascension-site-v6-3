@@ -40,12 +40,12 @@
   ];
 
   const FACTION_CONFIG = {
-    Padrao: { themeClass: '', logo: `${ROOT}Icons/logo-op-ascension.png`, avatar: `${ROOT}Icons/hero-placeholder.svg`, label: 'Central do Mar' },
-    Pirata: { themeClass: 'theme-pirata', logo: `${ROOT}Icons/piratas-ascension-v2.png?v=2`, avatar: `${ROOT}Icons/piratas.svg`, label: 'Piratas' },
-    Marinha: { themeClass: 'theme-marinha', logo: `${ROOT}Icons/marinha-ascension.png`, avatar: `${ROOT}Icons/marinha.svg`, label: 'Marinha' },
-    Mafia: { themeClass: 'theme-mafia', logo: `${ROOT}Icons/mafia-ascension.png`, avatar: `${ROOT}Icons/mafia.svg`, label: 'Máfia' },
-    Cacador: { themeClass: 'theme-cacador', logo: `${ROOT}Icons/cacadores-ascension.png`, avatar: `${ROOT}Icons/cacadores.svg`, label: 'Caçadores' },
-    Revolucionario: { themeClass: 'theme-revolucionario', logo: `${ROOT}Icons/revolucionarios-ascension.png`, avatar: `${ROOT}Icons/revolucionarios.svg`, label: 'Revolucionários' },
+    Padrao: { themeClass: '', logo: `${ROOT}Icons/logo-op-ascension.png`, avatar: `${ROOT}Icons/avatar-visitante.png?v=1`, label: 'Central do Mar' },
+    Pirata: { themeClass: 'theme-pirata', logo: `${ROOT}Icons/piratas-ascension-v2.png?v=2`, avatar: `${ROOT}Icons/avatar-pirata.png?v=1`, label: 'Piratas' },
+    Marinha: { themeClass: 'theme-marinha', logo: `${ROOT}Icons/marinha-ascension.png`, avatar: `${ROOT}Icons/avatar-marinha.png?v=1`, label: 'Marinha' },
+    Mafia: { themeClass: 'theme-mafia', logo: `${ROOT}Icons/mafia-ascension.png`, avatar: `${ROOT}Icons/avatar-mafia.png?v=1`, label: 'Máfia' },
+    Cacador: { themeClass: 'theme-cacador', logo: `${ROOT}Icons/cacadores-ascension.png`, avatar: `${ROOT}Icons/avatar-cacador.png?v=1`, label: 'Caçadores' },
+    Revolucionario: { themeClass: 'theme-revolucionario', logo: `${ROOT}Icons/revolucionarios-ascension.png`, avatar: `${ROOT}Icons/avatar-revolucionario.png?v=1`, label: 'Revolucionários' },
   };
 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -921,7 +921,7 @@
 
   function copyText(sel){const text=$(sel)?.value||localStorage.getItem(LS.LAST_SUMMARY)||'';if(!text)return showToast('Nada para copiar.','warning');navigator.clipboard?.writeText(text).then(()=>showToast('Resumo copiado.','success')).catch(()=>showToast('Não foi possível copiar automaticamente.','warning'));}
 
-  function bindSearch(){const form=$('#site-search-form');if(!form||form.dataset.bound)return;form.dataset.bound='1';const norm=v=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const routes=[[['historia','lore','poneglyph'],'inicio-historia.html'],[['tutorial','regra','1000','buff'],'tutorial.html'],[['ficha','atributo'],'criacao-ficha.html'],[['raca','mink','lunaria','gigante'],'racas.html'],[['linhagem','familia'],'linhagens.html'],[['profissao','subprofissao'],'profissoes.html'],[['faccao','marinha','pirata','revolucionario'],'faccoes.html'],[['edl','estilo'],'edl.html'],[['evolucao','treino'],'evolucao.html'],[['missao','pericia'],'pericia-missoes.html'],[['arco'],'arcos.html'],[['combate','estado','acerto'],'combate.html'],[['hp','dano','espirito'],'hp-dano.html'],[['hospital'],'hospital.html'],[['navio','doca','galeao'],'navios.html'],[['loja','preco'],'loja.html'],[['negocio','renda'],'negocios.html'],[['submundo','mercado negro'],'submundo.html'],[['npc','frota'],'npcs.html'],[['arma','ferreiro','gunsmith'],'armas.html'],[['akuma','haki','future sight'],'poderes.html'],[['navegacao','evento','log pose','rota','reverse mountain'],'navegacao.html'],[['mapa','mapas','mundo'],'mapas.html?regiao=mundo'],[['forca dos mares','força dos mares','teto do mar','pressao de saida','pressão de saída'],'forca-dos-mares.html']];form.addEventListener('submit',e=>{e.preventDefault();const raw=norm(esc($('#site-search-input')?.value));if(!raw)return;const found=routes.find(([terms])=>terms.some(t=>raw.includes(norm(t))||norm(t).includes(raw)));location.href=`${ROOT}Pages/${found?.[1]||'tutorial.html'}`;});}
+  function bindSearch(){const form=$('#site-search-form');if(!form||form.dataset.bound)return;form.dataset.bound='1';const norm=v=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const routes=[[['historia','lore','poneglyph'],'inicio-historia.html'],[['tutorial','regra','1000','buff'],'tutorial.html'],[['ficha','atributo'],'criacao-ficha.html'],[['raca','mink','lunaria','gigante'],'racas.html'],[['linhagem','familia'],'linhagens.html'],[['profissao','subprofissao'],'profissoes.html'],[['faccao','marinha','pirata','revolucionario'],'faccoes.html'],[['edl','estilo'],'edl.html'],[['evolucao','treino'],'evolucao.html'],[['missao','pericia'],'pericia-missoes.html'],[['arco'],'arcos.html'],[['combate','estado','acerto'],'combate.html'],[['hp','dano','espirito'],'hp-dano.html'],[['hospital'],'hospital.html'],[['navio','doca','galeao'],'navios.html'],[['loja','preco'],'loja.html'],[['negocio','renda'],'negocios.html'],[['submundo','mercado negro'],'submundo.html'],[['npc','frota'],'npcs.html'],[['arma','ferreiro','gunsmith'],'armas.html'],[['akuma','haki','future sight'],'poderes.html'],[['navegacao','evento','log pose'],'navegacao.html']];form.addEventListener('submit',e=>{e.preventDefault();const raw=norm(esc($('#site-search-input')?.value));if(!raw)return;const found=routes.find(([terms])=>terms.some(t=>raw.includes(norm(t))||norm(t).includes(raw)));location.href=`${ROOT}Pages/${found?.[1]||'tutorial.html'}`;});}
 
   function bindButtons(){ensureUtilityModals();const bind=(sel,event,fn)=>{const el=$(sel);if(el&&!el.dataset.bound){el.dataset.bound='1';el.addEventListener(event,fn);}};
     bind('#btn-login','click',()=>openModal('loginModal'));bind('#btn-cadastro','click',()=>openModal('cadastroModal'));bind('#btn-player-login','click',()=>openModal('loginModal'));bind('#btn-player-cadastro','click',()=>openModal('cadastroModal'));bind('#btn-novo-personagem','click',()=>openModal('criarPersonagemModal'));bind('#hero-btn-novo-personagem','click',()=>openModal('criarPersonagemModal'));bind('#btn-painel-usuario','click',()=>location.href=`${ROOT}Pages/player.html`);bind('#btn-perfil','click',()=>location.href=`${ROOT}Pages/player.html`);bind('#btn-logout-top','click',deslogar);bind('#btn-logout','click',deslogar);bind('#btn-character-death','click',markCharacterDead);
@@ -932,23 +932,8 @@
     bind('#opa-weapon-list','click',e=>{const b=e.target.closest('[data-inv-action]');if(b)handleWeaponAction(b);});bind('#opa-inventory-list','click',e=>{const b=e.target.closest('[data-item-action]');if(b)handleItemAction(b);});bind('#opa-active-effects','click',e=>{const b=e.target.closest('[data-effect-action="end"]');if(b)endEffect(b.dataset.id);});
     bind('#admin-player-select','change',()=>{localStorage.setItem(LS.ADMIN_SELECTED_USER,$('#admin-player-select').value);localStorage.removeItem(LS.ADMIN_SELECTED_CHAR);renderAdminSelectors();renderAdminCharacter();});bind('#admin-character-select','change',()=>{localStorage.setItem(LS.ADMIN_SELECTED_CHAR,$('#admin-character-select').value);renderAdminCharacter();});bind('#admin-audit-filter','change',renderAdminAudit);bind('#admin-audit-search','input',renderAdminAudit);bind('#admin-audit-feed','click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;if(b.dataset.action==='audit')auditChange(b.dataset.id,b.dataset.status);if(b.dataset.action==='open'){localStorage.setItem(LS.ADMIN_SELECTED_USER,b.dataset.user);localStorage.setItem(LS.ADMIN_SELECTED_CHAR,b.dataset.char);renderAdminSelectors();renderAdminCharacter();$('#admin-character-summary')?.scrollIntoView({behavior:'smooth',block:'center'});}});bind('#admin-correction-form','submit',e=>{e.preventDefault();submitAdminCorrection();});bind('#btn-copy-admin-correction','click',()=>copyText('#admin-correction-summary'));bind('#btn-export-backup','click',exportBackup);bind('#import-backup-file','change',()=>showToast('Importação pelo navegador foi desativada no modo compartilhado para preservar a integridade do banco. Use o Supabase/SQL para restaurações.','warning'));bind('#btn-claim-admin-code','click',activateAdminFromPlayerPage);bind('#btn-owner-save-code','click',ownerSaveTeamCode);bind('#btn-owner-toggle-signup','click',ownerToggleAdminSignup);bind('#owner-team-members','click',e=>{const b=e.target.closest('button[data-owner-role]');if(b)ownerChangeRole(b.dataset.user,b.dataset.ownerRole);});[['#toggle-team-code','#cadCodigo'],['#toggle-login-team-code','#loginCodigo'],['#toggle-activation-code','#team-access-code'],['#toggle-owner-team-code','#owner-team-code']].forEach(([btnSel,inputSel])=>bind(btnSel,'click',()=>{const inp=$(inputSel);if(!inp)return;inp.type=inp.type==='password'?'text':'password';const i=$(btnSel)?.querySelector('i');if(i)i.className=inp.type==='password'?'bi bi-eye':'bi bi-eye-slash';}));bindSearch();}
 
-  function ensureWorldNavigationLinks(){
-    const navAnchor=$$('.dropdown-menu a').find(a=>/(?:^|\/)navegacao\.html(?:$|[?#])/i.test(a.getAttribute('href')||''));
-    const menu=navAnchor?.closest('.dropdown-menu');
-    if(!menu)return;
-    const add=(key,href,label,icon)=>{
-      if(menu.querySelector(`[data-opa-world-extra="${key}"]`))return;
-      const li=document.createElement('li');
-      li.dataset.opaWorldExtra=key;
-      li.innerHTML=`<a class="dropdown-item" href="${ROOT}Pages/${href}"><i class="bi ${icon} me-2"></i>${label}</a>`;
-      menu.appendChild(li);
-    };
-    add('maps','mapas.html?regiao=mundo','Mapas do Mundo','bi-map');
-    add('forces','forca-dos-mares.html','Força dos Mares','bi-bar-chart-steps');
-  }
-
   function setActiveNav(){const page=document.body.dataset.page;$$('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));}
-  function renderAll(){ensureWorldNavigationLinks();ensureBuildAutomationUI();renderAuthArea();renderHomeData();renderPlayerPage();renderTeamAccess();renderAdminPage();renderOwnerTeamPanel();bindButtons();}
+  function renderAll(){ensureBuildAutomationUI();renderAuthArea();renderHomeData();renderPlayerPage();renderTeamAccess();renderAdminPage();renderOwnerTeamPanel();bindButtons();}
 
   Object.assign(window,{OPA:{state,MAX_CHARACTERS,GLOBAL_COMMON_BUFF_CAP,ATTRS,MARINE_RANKS,getActiveCharacter,getTotalBruto,getCommonBuffTotal,refresh:refreshOwn},realizarCadastro,realizarLogin,deslogar,salvarNovoPersonagem});
 
@@ -991,7 +976,7 @@
   }
 
   document.addEventListener('DOMContentLoaded',async()=>{
-    ensureWorldNavigationLinks();corrigirConsultaPublicaMobile();ensureUtilityModals();ensureBuildAutomationUI();setActiveNav();bindButtons();showBackendBanner();
+    corrigirConsultaPublicaMobile();ensureUtilityModals();ensureBuildAutomationUI();setActiveNav();bindButtons();showBackendBanner();
     if(!sb){renderAll();return;}
     const {data:{session}}=await sb.auth.getSession();state.authUser=session?.user||null;
     sb.auth.onAuthStateChange((_event,session)=>{state.authUser=session?.user||null;setTimeout(()=>refreshOwn(),0);});
