@@ -46,6 +46,8 @@
     Mafia: { themeClass: 'theme-mafia', logo: `${ROOT}Icons/mafia-ascension.png`, avatar: `${ROOT}Icons/avatar-mafia.png?v=1`, label: 'Máfia' },
     Cacador: { themeClass: 'theme-cacador', logo: `${ROOT}Icons/cacadores-ascension.png`, avatar: `${ROOT}Icons/avatar-cacador.png?v=1`, label: 'Caçadores' },
     Revolucionario: { themeClass: 'theme-revolucionario', logo: `${ROOT}Icons/revolucionarios-ascension.png`, avatar: `${ROOT}Icons/avatar-revolucionario.png?v=1`, label: 'Revolucionários' },
+    CipherPol: { themeClass: '', logo: `${ROOT}Icons/cipherpol-ascension.png?v=1`, avatar: `${ROOT}Icons/avatar-cipherpol.png?v=1`, label: 'Cipher Pol' },
+    Shichibukai: { themeClass: '', logo: `${ROOT}Icons/shichibukai-ascension.png?v=1`, avatar: `${ROOT}Icons/avatar-shichibukai.png?v=1`, label: 'Shichibukai' },
   };
 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -60,10 +62,19 @@
     catch { return v; }
   };
   const normalizeFaction = (value) => {
-    const map = { pirata:'Pirata', marinha:'Marinha', mafia:'Mafia', 'máfia':'Mafia', cacador:'Cacador', 'caçador':'Cacador', revolucionario:'Revolucionario', 'revolucionário':'Revolucionario' };
-    return map[esc(value).toLowerCase()] || esc(value) || 'Padrao';
+    const raw = esc(value).toLowerCase();
+    const map = {
+      pirata:'Pirata', piratas:'Pirata',
+      marinha:'Marinha', marinheiro:'Marinha', marinheiros:'Marinha',
+      mafia:'Mafia', 'máfia':'Mafia', mafioso:'Mafia', mafiosos:'Mafia',
+      cacador:'Cacador', 'caçador':'Cacador', 'caçadores':'Cacador', 'cacadores':'Cacador', 'caçadores de recompensa':'Cacador', 'cacadores de recompensa':'Cacador',
+      revolucionario:'Revolucionario', 'revolucionário':'Revolucionario', revolucionarios:'Revolucionario', 'revolucionários':'Revolucionario',
+      cipherpol:'CipherPol', 'cipher pol':'CipherPol', 'cipher-pol':'CipherPol', cp9:'CipherPol', 'cp-9':'CipherPol', cp0:'CipherPol', 'cp-0':'CipherPol', 'cp 9':'CipherPol', 'cp 0':'CipherPol', 'governo mundial':'CipherPol',
+      shichibukai:'Shichibukai', 'shichibukai do governo':'Shichibukai', 'corsario':'Shichibukai', 'corsário':'Shichibukai', 'corsarios':'Shichibukai', 'corsários':'Shichibukai', 'corsario do governo':'Shichibukai', 'corsário do governo':'Shichibukai'
+    };
+    return map[raw] || esc(value) || 'Padrao';
   };
-  const factionIcon = (f) => ({ Pirata:'🏴‍☠️', Marinha:'⚓', Mafia:'🕶️', Cacador:'⚔️', Revolucionario:'🚩', Padrao:'🌊' }[normalizeFaction(f)] || '🌊');
+  const factionIcon = (f) => ({ Pirata:'🏴‍☠️', Marinha:'⚓', Mafia:'🕶️', Cacador:'⚔️', Revolucionario:'🚩', CipherPol:'🕵️', Shichibukai:'☠️', Padrao:'🌊' }[normalizeFaction(f)] || '🌊');
   const isStaffRole = (role) => role === 'admin' || role === 'owner';
   const isOwnerRole = (role) => role === 'owner';
 
@@ -223,7 +234,7 @@
   };
 
   function setTheme(factionKey='Padrao') {
-    document.body.classList.remove('theme-pirata','theme-marinha','theme-mafia','theme-cacador','theme-revolucionario');
+    document.body.classList.remove('theme-pirata','theme-marinha','theme-mafia','theme-cacador','theme-revolucionario','theme-cipherpol','theme-shichibukai');
     const cfg = FACTION_CONFIG[normalizeFaction(factionKey)] || FACTION_CONFIG.Padrao;
     if (cfg.themeClass) document.body.classList.add(cfg.themeClass);
     if ($('#navbar-logo')) $('#navbar-logo').src = cfg.logo;
