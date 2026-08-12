@@ -26,7 +26,7 @@
     linhagem: ['Sem Linhagem','D.','Roronoa','Newgate','Capone','Dracule','Marshall','Nico','Donquixote','Charlotte','God','Neptune','Boa','Vinsmoke','Kozuki','Oars','Sakazuki','Borsalino','Riku','Nefertari','Mansherry','Inuarashi','Nekomamushi'],
     profissao: ['Combatente','Combatente — Monstro','Combatente — Fantasma','Combatente — Forte','Atirador','Médico','Navegador','Carpinteiro','Cientista','Músico','Cozinheiro','Arqueólogo','Tesoureiro','Caçador','Domador'],
     subprofissao: ['Nenhuma','Herbalista','Timoneiro','Ferreiro','Arquiteto','Gunsmith'],
-    edl: ['Santoryu (3 Espadas)','Nitoryu (2 Espadas)','Ittoryu (1 Espada)','Black Leg Style (Chutes)','Rokushiki (CP9/CP0)','Karatê Tritão','Electro Combat','Gyojin Jujutsu','Haki Style (puro Haki)','Arqueiro Kuja','Sulong Combat','Estilingue Artístico (God Style)']
+    edl: ['Santoryu (3 Espadas)','Nitoryu (2 Espadas)','Ittoryu (1 Espada)','Black Leg Style (Chutes)','Rokushiki','Ryosuken','Raposa de Fogo','Karatê Tritão','Electro Combat','Gyojin Jujutsu','Haki Style (puro Haki)','Arqueiro Kuja','Sulong Combat','Estilingue Artístico (God Style)']
   };
 
   const MARINE_RANKS = [
