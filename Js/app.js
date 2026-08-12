@@ -932,7 +932,7 @@
 
   function copyText(sel){const text=$(sel)?.value||localStorage.getItem(LS.LAST_SUMMARY)||'';if(!text)return showToast('Nada para copiar.','warning');navigator.clipboard?.writeText(text).then(()=>showToast('Resumo copiado.','success')).catch(()=>showToast('Não foi possível copiar automaticamente.','warning'));}
 
-  function bindSearch(){const form=$('#site-search-form');if(!form||form.dataset.bound)return;form.dataset.bound='1';const norm=v=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const routes=[[['historia','lore','poneglyph'],'inicio-historia.html'],[['tutorial','regra','1000','buff'],'tutorial.html'],[['ficha','atributo'],'criacao-ficha.html'],[['raca','mink','lunaria','gigante'],'racas.html'],[['linhagem','familia'],'linhagens.html'],[['profissao','subprofissao'],'profissoes.html'],[['faccao','marinha','pirata','revolucionario'],'faccoes.html'],[['edl','estilo'],'edl.html'],[['evolucao','treino'],'evolucao.html'],[['missao','pericia'],'pericia-missoes.html'],[['arco'],'arcos.html'],[['combate','estado','acerto'],'combate.html'],[['hp','dano','espirito'],'hp-dano.html'],[['hospital'],'hospital.html'],[['navio','doca','galeao'],'navios.html'],[['loja','preco'],'loja.html'],[['negocio','renda'],'negocios.html'],[['submundo','mercado negro'],'submundo.html'],[['npc','frota'],'npcs.html'],[['arma','ferreiro','gunsmith'],'armas.html'],[['akuma','haki','future sight'],'poderes.html'],[['navegacao','evento','log pose','rota','reverse mountain'],'navegacao.html'],[['mapa','mapas','mundo'],'mapas.html?regiao=mundo'],[['forca dos mares','força dos mares','teto do mar','pressao de saida','pressão de saída'],'forca-dos-mares.html']];form.addEventListener('submit',e=>{e.preventDefault();const raw=norm(esc($('#site-search-input')?.value));if(!raw)return;const found=routes.find(([terms])=>terms.some(t=>raw.includes(norm(t))||norm(t).includes(raw)));location.href=`${ROOT}Pages/${found?.[1]||'tutorial.html'}`;});}
+  function bindSearch(){const form=$('#site-search-form');if(!form||form.dataset.bound)return;form.dataset.bound='1';const norm=v=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const routes=[[['historia','lore','poneglyph'],'inicio-historia.html'],[['tutorial','regra','1000','buff'],'tutorial.html'],[['ficha','atributo'],'criacao-ficha.html'],[['raca','mink','lunaria','gigante'],'racas.html'],[['linhagem','familia'],'linhagens.html'],[['profissao','subprofissao','ferreiro','cacador','caçador','domador','cozinheiro','cientista'],'profissoes.html'],[['invencao','invenção','invenções','cientista','ciborgue','mods ciborgue','modificacoes ciborgue','modificações ciborgue'],'invencoes.html'],[['comida','comidas','culinaria','culinária','cozinheiro','banquete','refeicao','refeição'],'culinaria.html'],[['faccao','marinha','pirata','revolucionario'],'faccoes.html'],[['edl','estilo'],'edl.html'],[['evolucao','treino'],'evolucao.html'],[['missao','pericia'],'pericia-missoes.html'],[['arco'],'arcos.html'],[['combate','estado','acerto'],'combate.html'],[['hp','dano','espirito'],'hp-dano.html'],[['hospital'],'hospital.html'],[['navio','doca','galeao'],'navios.html'],[['loja','preco'],'loja.html'],[['negocio','renda'],'negocios.html'],[['submundo','mercado negro'],'submundo.html'],[['npc','frota'],'npcs.html'],[['arma','ferreiro','gunsmith'],'armas.html'],[['akuma','haki','future sight'],'poderes.html'],[['navegacao','evento','log pose','rota','reverse mountain'],'navegacao.html'],[['mapa','mapas','mundo'],'mapas.html?regiao=mundo'],[['forca dos mares','força dos mares','teto do mar','pressao de saida','pressão de saída'],'forca-dos-mares.html']];form.addEventListener('submit',e=>{e.preventDefault();const raw=norm(esc($('#site-search-input')?.value));if(!raw)return;const found=routes.find(([terms])=>terms.some(t=>raw.includes(norm(t))||norm(t).includes(raw)));location.href=`${ROOT}Pages/${found?.[1]||'tutorial.html'}`;});}
 
   function bindButtons(){ensureUtilityModals();const bind=(sel,event,fn)=>{const el=$(sel);if(el&&!el.dataset.bound){el.dataset.bound='1';el.addEventListener(event,fn);}};
     bind('#btn-login','click',()=>openModal('loginModal'));bind('#btn-cadastro','click',()=>openModal('cadastroModal'));bind('#btn-player-login','click',()=>openModal('loginModal'));bind('#btn-player-cadastro','click',()=>openModal('cadastroModal'));bind('#btn-novo-personagem','click',()=>openModal('criarPersonagemModal'));bind('#hero-btn-novo-personagem','click',()=>openModal('criarPersonagemModal'));bind('#btn-painel-usuario','click',()=>location.href=`${ROOT}Pages/player.html`);bind('#btn-perfil','click',()=>location.href=`${ROOT}Pages/player.html`);bind('#btn-logout-top','click',deslogar);bind('#btn-logout','click',deslogar);bind('#btn-character-death','click',markCharacterDead);
@@ -958,8 +958,25 @@
     add('forces','forca-dos-mares.html','Força dos Mares','bi-bar-chart-steps');
   }
 
+  function ensureProfessionNavigationLinks(){
+    const profAnchor=$$('.dropdown-menu a').find(a=>/(?:^|\/)profissoes\.html(?:$|[?#])/i.test(a.getAttribute('href')||''));
+    const menu=profAnchor?.closest('.dropdown-menu');
+    if(!menu)return;
+    const addAfter=(key,href,label,icon,afterEl)=>{
+      if(menu.querySelector(`[data-opa-prof-extra="${key}"]`))return afterEl;
+      const li=document.createElement('li');
+      li.dataset.opaProfExtra=key;
+      li.innerHTML=`<a class="dropdown-item" href="${ROOT}Pages/${href}"><i class="bi ${icon} me-2"></i>${label}</a>`;
+      const ref=(afterEl?.closest('li')||afterEl);
+      if(ref?.parentNode===menu) ref.insertAdjacentElement('afterend',li); else menu.appendChild(li);
+      return li.querySelector('a');
+    };
+    const inventions=addAfter('inventions','invencoes.html','Invenções','bi-cpu',profAnchor);
+    addAfter('cooking','culinaria.html','Culinária & Comidas','bi-egg-fried',inventions);
+  }
+
   function setActiveNav(){const page=document.body.dataset.page;$$('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));}
-  function renderAll(){ensureWorldNavigationLinks();ensureBuildAutomationUI();renderAuthArea();renderHomeData();renderPlayerPage();renderTeamAccess();renderAdminPage();renderOwnerTeamPanel();bindButtons();}
+  function renderAll(){ensureWorldNavigationLinks();ensureProfessionNavigationLinks();ensureBuildAutomationUI();renderAuthArea();renderHomeData();renderPlayerPage();renderTeamAccess();renderAdminPage();renderOwnerTeamPanel();bindButtons();}
 
   Object.assign(window,{OPA:{state,MAX_CHARACTERS,GLOBAL_COMMON_BUFF_CAP,ATTRS,MARINE_RANKS,getActiveCharacter,getTotalBruto,getCommonBuffTotal,refresh:refreshOwn},realizarCadastro,realizarLogin,deslogar,salvarNovoPersonagem});
 
